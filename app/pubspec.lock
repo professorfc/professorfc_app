@@ -69,11 +69,9 @@ packages:
   custom_view:
     dependency: "direct main"
     description:
-      path: "."
-      ref: main
-      resolved-ref: "19ab0368a1699f61b67482c0290cbe8b07ad7f4a"
-      url: "https://github.com/pesquisaedesenvolvimento/custom_view.git"
-    source: git
+      path: "../custom_view"
+      relative: true
+    source: path
     version: "0.0.2"
   device_info:
     dependency: transitive

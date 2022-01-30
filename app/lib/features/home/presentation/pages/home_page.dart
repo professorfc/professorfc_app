@@ -1,6 +1,7 @@
 import 'package:custom_view/custom_view.dart';
 import 'package:flutter/material.dart';
 import 'package:professorfc_app/widgets/custom_bottom_navigation_bar.dart';
+import 'package:professorfc_app/widgets/draggable_floating_action_button.dart';
 import 'package:professorfc_app/widgets/fancy_fab.dart';
 import 'package:professorfc_app/widgets/player_item.dart';
 
@@ -12,7 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
+  final GlobalKey _parentKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,7 @@ class _HomePageState extends State<HomePage> {
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: Stack(
+            key: _parentKey,
             fit: StackFit.expand,
             children: [
               _buildBackground(),
@@ -51,13 +53,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildTeam() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const PlayerItem(),
-        ],
-      ),
+    return DraggableFloatingActionButton(
+      child: const PlayerItem(),
+      initialOffset: const Offset(120, 70),
+      parentKey: _parentKey,
+      onPressed: () {},
     );
   }
 

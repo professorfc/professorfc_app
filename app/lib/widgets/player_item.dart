@@ -2,9 +2,9 @@ import 'package:custom_view/custom_view.dart';
 import 'package:flutter/material.dart';
 
 class PlayerItem extends StatelessWidget {
-  const PlayerItem({Key? key, required this.players}) : super(key: key);
+  const PlayerItem({Key? key, required this.allPlayers}) : super(key: key);
 
-  final List<CustomItemModalFit> players;
+  final List<CustomItemModalFit> allPlayers;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class PlayerItem extends StatelessWidget {
         showMaterialModalBottomSheet(
           context: context,
           builder: (context) => CustomModalFit(
-            items: players,
+            items: allPlayers,
           ),
         );
       },

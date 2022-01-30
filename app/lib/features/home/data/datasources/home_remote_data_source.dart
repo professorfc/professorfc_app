@@ -12,7 +12,18 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
 
   @override
   Future<List<PlayerModel>> getPlayers() {
-    // TODO: implement getPlayers
-    throw UnimplementedError();
+    return Future.value([
+      const PlayerModel(dx: 120, dy: 170, name: "Felipe"),
+      const PlayerModel(dx: 220, dy: 250, name: "Felipe"),
+      const PlayerModel(dx: 90, dy: 80, name: "Felipe"),
+      const PlayerModel(dx: 200, dy: 20, name: "Felipe"),
+      const PlayerModel(dx: 35, dy: 100, name: "Felipe"),
+      const PlayerModel(dx: 20, dy: 150, name: "Felipe"),
+      const PlayerModel(dx: 55, dy: 180, name: "Felipe"),
+      const PlayerModel(dx: 67, dy: 270, name: "Felipe"),
+      const PlayerModel(dx: 100, dy: 20, name: "Felipe"),
+      const PlayerModel(dx: 190, dy: 46, name: "Felipe"),
+      const PlayerModel(dx: 167, dy: 5, name: "Felipe"),
+    ]);
   }
 }

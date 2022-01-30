@@ -1,4 +1,5 @@
 import 'package:custom_utilities/custom_utilities.dart';
+import 'package:professorfc_app/features/home/data/models/player_model.dart';
 
 class HomeState extends DefaultState {
   HomeState({
@@ -7,6 +8,8 @@ class HomeState extends DefaultState {
     bool? isError,
     bool? isSuccess,
     String? errorMessage,
+    this.players,
+    this.forceRefresh,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -15,6 +18,9 @@ class HomeState extends DefaultState {
           errorMessage: errorMessage,
         );
 
+  final int? forceRefresh;
+  final List<PlayerModel>? players;
+
   factory HomeState.initial() {
     return HomeState(
       isSuccess: false,
@@ -22,22 +28,27 @@ class HomeState extends DefaultState {
       isError: false,
       isLoading: false,
       errorMessage: null,
+      players: const [],
+      forceRefresh: null,
     );
   }
 
-  HomeState copyWith({
-    bool? isLoading,
-    bool? isSuccess,
-    bool? isEmpty,
-    bool? isError,
-    String? errorMessage,
-  }) {
+  HomeState copyWith(
+      {bool? isLoading,
+      bool? isSuccess,
+      bool? isEmpty,
+      bool? isError,
+      String? errorMessage,
+      List<PlayerModel>? players,
+      int? forceRefresh}) {
     return HomeState(
       isLoading: isLoading ?? this.isLoading,
       isSuccess: isSuccess ?? this.isSuccess,
       isEmpty: isEmpty ?? this.isEmpty,
       isError: isError ?? this.isError,
       errorMessage: errorMessage ?? this.errorMessage,
+      players: players ?? this.players,
+      forceRefresh: forceRefresh ?? this.forceRefresh,
     );
   }
 }

@@ -1,5 +1,10 @@
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:custom_view/custom_view.dart';
 import 'package:flutter/material.dart';
+import 'package:professorfc_app/features/home/data/models/player_model.dart';
+import 'package:professorfc_app/features/home/presentation/bloc/home_cubit.dart';
+import 'package:professorfc_app/features/home/presentation/bloc/home_state.dart';
+import 'package:professorfc_app/setup.dart';
 import 'package:professorfc_app/widgets/custom_bottom_navigation_bar.dart';
 import 'package:professorfc_app/widgets/draggable_floating_action_button.dart';
 import 'package:professorfc_app/widgets/fancy_fab.dart';
@@ -14,6 +19,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey _parentKey = GlobalKey();
+  late HomeCubit _homeCubit;
+
+  @override
+  void initState() {
+    _homeCubit = getItInstance.get<HomeCubit>()..getPlayers();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +33,29 @@ class _HomePageState extends State<HomePage> {
       child: Container(
         color: const Color(0xff008001),
         constraints: const BoxConstraints.expand(),
-        child: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Stack(
-            key: _parentKey,
-            fit: StackFit.expand,
-            children: [
-              _buildBackground(),
-              ..._buildTeam(),
-            ],
-          ),
+        child: BlocBuilder<HomeCubit, HomeState>(
+          bloc: _homeCubit,
+          builder: (context, state) {
+            if (state.isLoading == true) {
+              return CustomCircularProgressIndicator(
+                color: Theme.of(context).backgroundColor,
+              );
+            } else if (state.players!.isNotEmpty) {
+              return Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Stack(
+                  key: _parentKey,
+                  fit: StackFit.expand,
+                  children: [
+                    _buildBackground(),
+                    ..._buildTeam(state.players!),
+                  ],
+                ),
+              );
+            }
+
+            return const SizedBox.shrink();
+          },
         ),
       ),
       floatingActionButton: FancyFab(
@@ -52,25 +77,17 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  List<Widget> _buildTeam() {
-    return [
-      DraggableFloatingActionButton(
+  List<Widget> _buildTeam(List<PlayerModel> players) {
+    return players.map<Widget>((e) {
+      return DraggableFloatingActionButton(
         child: PlayerItem(
-          players: _players(),
+          allPlayers: _allPlayers(),
         ),
-        initialOffset: const Offset(120, 70),
+        initialOffset: Offset(e.dx, e.dy),
         parentKey: _parentKey,
         onPressed: () {},
-      ),
-      DraggableFloatingActionButton(
-        child: PlayerItem(
-          players: _players(),
-        ),
-        initialOffset: const Offset(220, 70),
-        parentKey: _parentKey,
-        onPressed: () {},
-      ),
-    ];
+      );
+    }).toList();
   }
 
   Widget _buildBackground() {
@@ -85,7 +102,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  List<CustomItemModalFit> _players() {
+  List<CustomItemModalFit> _allPlayers() {
     return [
       CustomItemModalFit(
         text: 'Jogador 1',

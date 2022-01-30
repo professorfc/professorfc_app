@@ -20,9 +20,10 @@ dependencies:
     #   ref: main
     path: ../custom_view
   custom_utilities:
-    git:
-      url: https://github.com/pesquisaedesenvolvimento/custom_utilities.git
-      ref: main
+    # git:
+    #   url: https://github.com/pesquisaedesenvolvimento/custom_utilities.git
+    #   ref: main
+    path: ../custom_utilities
 
 dev_dependencies:
   flutter_test:

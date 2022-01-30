@@ -30,8 +30,9 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      floatingActionButton:
-          FancyFab(beginButtonColor: Theme.of(context).primaryColor),
+      floatingActionButton: FancyFab(
+        beginButtonColor: Theme.of(context).backgroundColor,
+      ),
       bottomNavigationBar: CustomBottomNavigationBar(
         items: const [
           BottomNavigationBarItem(

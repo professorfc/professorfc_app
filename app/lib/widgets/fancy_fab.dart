@@ -1,3 +1,4 @@
+import 'package:custom_view/custom_view.dart';
 import 'package:flutter/material.dart';
 
 class FancyFab extends StatefulWidget {
@@ -88,52 +89,45 @@ class _FancyFabState extends State<FancyFab>
         );
   }
 
-  Widget add() {
-    return Container(
-      child: FloatingActionButton(
-        onPressed: null,
-        backgroundColor: _overrideFloactingActionButtonTheme.backgroundColor,
-        foregroundColor: _overrideFloactingActionButtonTheme.foregroundColor,
-        tooltip: 'Add',
-        child: Icon(Icons.add),
-      ),
+  Widget share() {
+    return FloatingActionButton(
+      onPressed: null,
+      backgroundColor: _overrideFloactingActionButtonTheme.backgroundColor,
+      foregroundColor: _overrideFloactingActionButtonTheme.foregroundColor,
+      tooltip: 'Share',
+      child: const Icon(AppIcons.share),
     );
   }
 
-  Widget image() {
-    return Container(
-      child: FloatingActionButton(
-        onPressed: null,
-        backgroundColor: _overrideFloactingActionButtonTheme.backgroundColor,
-        foregroundColor: _overrideFloactingActionButtonTheme.foregroundColor,
-        tooltip: 'Image',
-        child: Icon(Icons.image),
-      ),
+  Widget save() {
+    return FloatingActionButton(
+      onPressed: null,
+      backgroundColor: _overrideFloactingActionButtonTheme.backgroundColor,
+      foregroundColor: _overrideFloactingActionButtonTheme.foregroundColor,
+      tooltip: 'Save',
+      child: const Icon(AppIcons.save),
     );
   }
 
-  Widget inbox() {
-    return Container(
-      child: FloatingActionButton(
-        onPressed: null,
-        backgroundColor: _overrideFloactingActionButtonTheme.backgroundColor,
-        foregroundColor: _overrideFloactingActionButtonTheme.foregroundColor,
-        tooltip: 'Inbox',
-        child: Icon(Icons.inbox),
-      ),
+  Widget search() {
+    return FloatingActionButton(
+      onPressed: null,
+      backgroundColor: _overrideFloactingActionButtonTheme.backgroundColor,
+      foregroundColor: _overrideFloactingActionButtonTheme.foregroundColor,
+      tooltip: 'Search',
+      child: const Icon(AppIcons.search),
     );
   }
 
   Widget toggle() {
-    return Container(
-      child: FloatingActionButton(
-        backgroundColor: _buttonColor.value,
-        onPressed: animate,
-        tooltip: 'Toggle',
-        child: AnimatedIcon(
-          icon: AnimatedIcons.menu_close,
-          progress: _animateIcon,
-        ),
+    return FloatingActionButton(
+      backgroundColor: _buttonColor.value,
+      foregroundColor: isOpened ? Theme.of(context).backgroundColor : Theme.of(context).primaryColor,
+      onPressed: animate,
+      tooltip: 'Toggle',
+      child: AnimatedIcon(
+        icon: AnimatedIcons.menu_close,
+        progress: _animateIcon,
       ),
     );
   }
@@ -149,7 +143,7 @@ class _FancyFabState extends State<FancyFab>
             _translateButton.value * 3.0,
             0.0,
           ),
-          child: add(),
+          child: share(),
         ),
         Transform(
           transform: Matrix4.translationValues(
@@ -157,7 +151,7 @@ class _FancyFabState extends State<FancyFab>
             _translateButton.value * 2.0,
             0.0,
           ),
-          child: image(),
+          child: save(),
         ),
         Transform(
           transform: Matrix4.translationValues(
@@ -165,7 +159,7 @@ class _FancyFabState extends State<FancyFab>
             _translateButton.value,
             0.0,
           ),
-          child: inbox(),
+          child: search(),
         ),
         toggle(),
       ],

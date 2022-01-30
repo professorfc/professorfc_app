@@ -1,3 +1,4 @@
+import 'package:custom_view/custom_view.dart';
 import 'package:flutter/material.dart';
 
 class PlayerItem extends StatelessWidget {
@@ -5,22 +6,43 @@ class PlayerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        SizedBox(
-          height: 50,
-          child: ClipPath(
-            child: Image(
-              image: AssetImage("assets/images/player_2.png"),
-              fit: BoxFit.fitHeight,
+    return InkWell(
+      onTap: () {
+        showMaterialModalBottomSheet(
+          context: context,
+          builder: (context) => CustomModalFit(
+            items: [
+              CustomItemModalFit(
+                text: 'Jogador 1',
+                iconData: AppIcons.user,
+                onTap: () {},
+              ),
+              CustomItemModalFit(
+                text: 'Jogador 2',
+                iconData: AppIcons.user,
+                onTap: () {},
+              ),
+            ],
+          ),
+        );
+      },
+      child: Column(
+        children: const [
+          SizedBox(
+            height: 50,
+            child: ClipPath(
+              child: Image(
+                image: AssetImage("assets/images/player_2.png"),
+                fit: BoxFit.fitHeight,
+              ),
             ),
           ),
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        Text("Fulano de tal"),
-      ],
+          SizedBox(
+            height: 5,
+          ),
+          Text("Fulano de tal"),
+        ],
+      ),
     );
   }
 }

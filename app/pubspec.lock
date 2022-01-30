@@ -67,14 +67,14 @@ packages:
   custom_utilities:
     dependency: "direct main"
     description:
-      path: "../custom_utilities"
+      path: "../../custom_utilities"
       relative: true
     source: path
     version: "0.0.1"
   custom_view:
     dependency: "direct main"
     description:
-      path: "../custom_view"
+      path: "../../custom_view"
       relative: true
     source: path
     version: "0.0.2"
@@ -282,6 +282,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+  modal_bottom_sheet:
+    dependency: transitive
+    description:
+      name: modal_bottom_sheet
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   nested:
     dependency: transitive
     description:

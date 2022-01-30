@@ -2,7 +2,9 @@ import 'package:custom_view/custom_view.dart';
 import 'package:flutter/material.dart';
 
 class PlayerItem extends StatelessWidget {
-  const PlayerItem({Key? key}) : super(key: key);
+  const PlayerItem({Key? key, required this.players}) : super(key: key);
+
+  final List<CustomItemModalFit> players;
 
   @override
   Widget build(BuildContext context) {
@@ -11,37 +13,35 @@ class PlayerItem extends StatelessWidget {
         showMaterialModalBottomSheet(
           context: context,
           builder: (context) => CustomModalFit(
-            items: [
-              CustomItemModalFit(
-                text: 'Jogador 1',
-                iconData: AppIcons.user,
-                onTap: () {},
-              ),
-              CustomItemModalFit(
-                text: 'Jogador 2',
-                iconData: AppIcons.user,
-                onTap: () {},
-              ),
-            ],
+            items: players,
           ),
         );
       },
-      child: Column(
-        children: const [
-          SizedBox(
-            height: 50,
-            child: ClipPath(
-              child: Image(
-                image: AssetImage("assets/images/player_2.png"),
-                fit: BoxFit.fitHeight,
+      child: SizedBox(
+        width: 80,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(
+              width: 50,
+              child: ClipPath(
+                child: Image(
+                  image: AssetImage("assets/images/player_2.png"),
+                  fit: BoxFit.fitHeight,
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Text("Fulano de tal"),
-        ],
+            SpacerBox.v4,
+            "Fulano de tal".description(
+              context,
+              textAlign: TextAlign.center,
+              color: Theme.of(context).backgroundColor,
+              maxLines: 2,
+              fontSize: CustomFontSize.f13,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,4 +1,4 @@
-part of 'home_bloc.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 class HomeState extends DefaultState {
   HomeState({

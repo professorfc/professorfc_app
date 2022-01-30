@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
             fit: StackFit.expand,
             children: [
               _buildBackground(),
-              _buildTeam(),
+              ..._buildTeam(),
             ],
           ),
         ),
@@ -52,13 +52,25 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildTeam() {
-    return DraggableFloatingActionButton(
-      child: const PlayerItem(),
-      initialOffset: const Offset(120, 70),
-      parentKey: _parentKey,
-      onPressed: () {},
-    );
+  List<Widget> _buildTeam() {
+    return [
+      DraggableFloatingActionButton(
+        child: PlayerItem(
+          players: _players(),
+        ),
+        initialOffset: const Offset(120, 70),
+        parentKey: _parentKey,
+        onPressed: () {},
+      ),
+      DraggableFloatingActionButton(
+        child: PlayerItem(
+          players: _players(),
+        ),
+        initialOffset: const Offset(220, 70),
+        parentKey: _parentKey,
+        onPressed: () {},
+      ),
+    ];
   }
 
   Widget _buildBackground() {
@@ -71,5 +83,70 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  List<CustomItemModalFit> _players() {
+    return [
+      CustomItemModalFit(
+        text: 'Jogador 1',
+        iconData: AppIcons.user,
+        onTap: () {},
+      ),
+      CustomItemModalFit(
+        text: 'Jogador 2',
+        iconData: AppIcons.user,
+        onTap: () {},
+      ),
+      CustomItemModalFit(
+        text: 'Jogador 1',
+        iconData: AppIcons.user,
+        onTap: () {},
+      ),
+      CustomItemModalFit(
+        text: 'Jogador 2',
+        iconData: AppIcons.user,
+        onTap: () {},
+      ),
+      CustomItemModalFit(
+        text: 'Jogador 1',
+        iconData: AppIcons.user,
+        onTap: () {},
+      ),
+      CustomItemModalFit(
+        text: 'Jogador 2',
+        iconData: AppIcons.user,
+        onTap: () {},
+      ),
+      CustomItemModalFit(
+        text: 'Jogador 1',
+        iconData: AppIcons.user,
+        onTap: () {},
+      ),
+      CustomItemModalFit(
+        text: 'Jogador 2',
+        iconData: AppIcons.user,
+        onTap: () {},
+      ),
+      CustomItemModalFit(
+        text: 'Jogador 1',
+        iconData: AppIcons.user,
+        onTap: () {},
+      ),
+      CustomItemModalFit(
+        text: 'Jogador 2',
+        iconData: AppIcons.user,
+        onTap: () {},
+      ),
+      CustomItemModalFit(
+        text: 'Jogador 1',
+        iconData: AppIcons.user,
+        onTap: () {},
+      ),
+      CustomItemModalFit(
+        text: 'Jogador 3',
+        iconData: AppIcons.user,
+        onTap: () {},
+      ),
+    ];
   }
 }

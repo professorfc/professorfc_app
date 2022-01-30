@@ -4,8 +4,14 @@ class FancyFab extends StatefulWidget {
   final Function()? onPressed;
   final String? tooltip;
   final IconData? icon;
+  final Color beginButtonColor;
 
-  FancyFab({this.onPressed, this.tooltip, this.icon});
+  FancyFab({
+    required this.beginButtonColor,
+    this.onPressed,
+    this.tooltip,
+    this.icon,
+  });
 
   @override
   _FancyFabState createState() => _FancyFabState();
@@ -18,29 +24,34 @@ class _FancyFabState extends State<FancyFab>
   late Animation<Color?> _buttonColor;
   late Animation<double> _animateIcon;
   late Animation<double> _translateButton;
-  Curve _curve = Curves.easeOut;
-  double _fabHeight = 56.0;
+  final Curve _curve = Curves.easeOut;
+  final double _fabHeight = 56.0;
 
   @override
   initState() {
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500))
-          ..addListener(() {
-            setState(() {});
-          });
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 500))
+      ..addListener(() {
+        setState(() {});
+      });
+
     _animateIcon =
         Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
+
     _buttonColor = ColorTween(
-      begin: Colors.blue,
+      begin: widget.beginButtonColor,
       end: Colors.red,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Interval(
-        0.00,
-        1.00,
-        curve: Curves.linear,
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(
+          0.00,
+          1.00,
+          curve: Curves.linear,
+        ),
       ),
-    ));
+    );
+
     _translateButton = Tween<double>(
       begin: _fabHeight,
       end: -14.0,
@@ -70,10 +81,19 @@ class _FancyFabState extends State<FancyFab>
     isOpened = !isOpened;
   }
 
+  FloatingActionButtonThemeData get _overrideFloactingActionButtonTheme {
+    return Theme.of(context).floatingActionButtonTheme.copyWith(
+          backgroundColor: Theme.of(context).backgroundColor,
+          foregroundColor: Theme.of(context).primaryColor,
+        );
+  }
+
   Widget add() {
     return Container(
       child: FloatingActionButton(
         onPressed: null,
+        backgroundColor: _overrideFloactingActionButtonTheme.backgroundColor,
+        foregroundColor: _overrideFloactingActionButtonTheme.foregroundColor,
         tooltip: 'Add',
         child: Icon(Icons.add),
       ),
@@ -84,6 +104,8 @@ class _FancyFabState extends State<FancyFab>
     return Container(
       child: FloatingActionButton(
         onPressed: null,
+        backgroundColor: _overrideFloactingActionButtonTheme.backgroundColor,
+        foregroundColor: _overrideFloactingActionButtonTheme.foregroundColor,
         tooltip: 'Image',
         child: Icon(Icons.image),
       ),
@@ -94,6 +116,8 @@ class _FancyFabState extends State<FancyFab>
     return Container(
       child: FloatingActionButton(
         onPressed: null,
+        backgroundColor: _overrideFloactingActionButtonTheme.backgroundColor,
+        foregroundColor: _overrideFloactingActionButtonTheme.foregroundColor,
         tooltip: 'Inbox',
         child: Icon(Icons.inbox),
       ),

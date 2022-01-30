@@ -16,21 +16,22 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+      child: Container(
+        color: const Color(0xff008001),
+        constraints: const BoxConstraints.expand(),
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              _buildBackground(),
+              _buildTeam(),
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FancyFab(),
+      floatingActionButton:
+          FancyFab(beginButtonColor: Theme.of(context).primaryColor),
       bottomNavigationBar: CustomBottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
@@ -43,6 +44,35 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
         onTap: (int currentIndex) {},
+      ),
+    );
+  }
+
+  Widget _buildTeam() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          const Text(
+            'You have pushed the button this many times:',
+          ),
+          Text(
+            '$_counter',
+            style: Theme.of(context).textTheme.headline4,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBackground() {
+    return const RotatedBox(
+      quarterTurns: 1,
+      child: ClipPath(
+        child: Image(
+          image: AssetImage("assets/images/camp_2.png"),
+          fit: BoxFit.fitHeight,
+        ),
       ),
     );
   }

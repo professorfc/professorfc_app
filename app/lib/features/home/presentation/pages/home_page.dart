@@ -2,6 +2,7 @@ import 'package:custom_view/custom_view.dart';
 import 'package:flutter/material.dart';
 import 'package:professorfc_app/widgets/custom_bottom_navigation_bar.dart';
 import 'package:professorfc_app/widgets/fancy_fab.dart';
+import 'package:professorfc_app/widgets/player_item.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -61,6 +62,7 @@ class _HomePageState extends State<HomePage> {
             '$_counter',
             style: Theme.of(context).textTheme.headline4,
           ),
+          const PlayerItem(),
         ],
       ),
     );

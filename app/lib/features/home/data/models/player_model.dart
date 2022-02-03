@@ -1,3 +1,4 @@
+import 'package:professorfc_app/features/home/domain/entities/enums/position_enum.dart';
 import 'package:professorfc_app/features/home/domain/entities/player.dart';
 
 class PlayerModel extends Player {
@@ -6,11 +7,13 @@ class PlayerModel extends Player {
     String? photo,
     required double dx,
     required double dy,
+    required PositionEnum position,
   }) : super(
           name: name,
           photo: photo,
           dx: dx,
           dy: dy,
+          position: position,
         );
 
   factory PlayerModel.fromJson(Map<String, dynamic> json) {
@@ -19,6 +22,7 @@ class PlayerModel extends Player {
       photo: json['photo'],
       dx: json['dx'],
       dy: json['dy'],
+      position: PositionEnum.values[json['position']],
     );
   }
 
@@ -39,6 +43,7 @@ class PlayerModel extends Player {
       photo: photo,
       dx: dx,
       dy: dy,
+      position: position,
     );
   }
 }

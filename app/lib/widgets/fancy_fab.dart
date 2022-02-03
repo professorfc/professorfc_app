@@ -7,11 +7,14 @@ class FancyFab extends StatefulWidget {
   final IconData? icon;
   final Color beginButtonColor;
 
+  final VoidCallback formmationCallback;
+
   FancyFab({
     required this.beginButtonColor,
     this.onPressed,
     this.tooltip,
     this.icon,
+    required this.formmationCallback,
   });
 
   @override
@@ -89,6 +92,16 @@ class _FancyFabState extends State<FancyFab>
         );
   }
 
+  Widget formation() {
+    return FloatingActionButton(
+      onPressed: widget.formmationCallback,
+      backgroundColor: _overrideFloactingActionButtonTheme.backgroundColor,
+      foregroundColor: _overrideFloactingActionButtonTheme.foregroundColor,
+      tooltip: 'Formation',
+      child: const Icon(AppIcons.futbol),
+    );
+  }
+
   Widget share() {
     return FloatingActionButton(
       onPressed: null,
@@ -122,7 +135,9 @@ class _FancyFabState extends State<FancyFab>
   Widget toggle() {
     return FloatingActionButton(
       backgroundColor: _buttonColor.value,
-      foregroundColor: isOpened ? Theme.of(context).backgroundColor : Theme.of(context).primaryColor,
+      foregroundColor: isOpened
+          ? Theme.of(context).backgroundColor
+          : Theme.of(context).primaryColor,
       onPressed: animate,
       tooltip: 'Toggle',
       child: AnimatedIcon(
@@ -140,7 +155,7 @@ class _FancyFabState extends State<FancyFab>
         Transform(
           transform: Matrix4.translationValues(
             0.0,
-            _translateButton.value * 3.0,
+            _translateButton.value * 4.0,
             0.0,
           ),
           child: share(),
@@ -148,7 +163,7 @@ class _FancyFabState extends State<FancyFab>
         Transform(
           transform: Matrix4.translationValues(
             0.0,
-            _translateButton.value * 2.0,
+            _translateButton.value * 3.0,
             0.0,
           ),
           child: save(),
@@ -156,10 +171,18 @@ class _FancyFabState extends State<FancyFab>
         Transform(
           transform: Matrix4.translationValues(
             0.0,
-            _translateButton.value,
+            _translateButton.value * 2.0,
             0.0,
           ),
           child: search(),
+        ),
+        Transform(
+          transform: Matrix4.translationValues(
+            0.0,
+            _translateButton.value,
+            0.0,
+          ),
+          child: formation(),
         ),
         toggle(),
       ],

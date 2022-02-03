@@ -1,22 +1,21 @@
 import 'package:custom_view/custom_view.dart';
 import 'package:flutter/material.dart';
+import 'package:professorfc_app/features/home/data/models/player_model.dart';
 
 class PlayerItem extends StatelessWidget {
-  const PlayerItem({Key? key, required this.allPlayers}) : super(key: key);
+  const PlayerItem({
+    Key? key,
+    required this.player,
+    required this.onTap,
+  }) : super(key: key);
 
-  final List<CustomItemModalFit> allPlayers;
+  final VoidCallback onTap;
+  final PlayerModel player;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        showMaterialModalBottomSheet(
-          context: context,
-          builder: (context) => CustomModalFit(
-            items: allPlayers,
-          ),
-        );
-      },
+      onTap: onTap,
       child: SizedBox(
         width: 80,
         child: Column(

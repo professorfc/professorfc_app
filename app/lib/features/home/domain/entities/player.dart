@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:professorfc_app/features/home/domain/entities/enums/position_enum.dart';
 
 class Player extends Equatable {
   const Player({
@@ -6,12 +7,14 @@ class Player extends Equatable {
     this.photo,
     required this.dx,
     required this.dy,
+    required this.position,
   });
 
   final String name;
   final String? photo;
   final double dx;
   final double dy;
+  final PositionEnum position;
 
   @override
   List<Object?> get props => <Object?>[
@@ -19,5 +22,6 @@ class Player extends Equatable {
         photo,
         dx,
         dy,
+        position,
       ];
 }

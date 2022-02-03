@@ -8,6 +8,7 @@ import 'package:professorfc_app/setup.dart';
 import 'package:professorfc_app/widgets/custom_bottom_navigation_bar.dart';
 import 'package:professorfc_app/widgets/draggable_floating_action_button.dart';
 import 'package:professorfc_app/widgets/fancy_fab.dart';
+import 'package:professorfc_app/widgets/formations.dart';
 import 'package:professorfc_app/widgets/player_item.dart';
 
 class HomePage extends StatefulWidget {
@@ -60,6 +61,9 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FancyFab(
         beginButtonColor: Theme.of(context).backgroundColor,
+        formmationCallback: () {
+          showFormations(context);
+        },
       ),
       bottomNavigationBar: CustomBottomNavigationBar(
         items: const [
@@ -81,7 +85,15 @@ class _HomePageState extends State<HomePage> {
     return players.map<Widget>((e) {
       return DraggableFloatingActionButton(
         child: PlayerItem(
-          allPlayers: _allPlayers(),
+          player: e,
+          onTap: () {
+            showMaterialModalBottomSheet(
+              context: context,
+              builder: (context) => CustomModalFit(
+                items: _allPlayers(),
+              ),
+            );
+          },
         ),
         initialOffset: Offset(e.dx, e.dy),
         parentKey: _parentKey,

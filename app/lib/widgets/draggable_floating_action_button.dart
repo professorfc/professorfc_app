@@ -1,16 +1,19 @@
 import 'package:custom_utilities/custom_utilities.dart';
 import 'package:flutter/material.dart';
+import 'package:professorfc_app/features/home/data/models/player_model.dart';
 
 class DraggableFloatingActionButton extends StatefulWidget {
   final Widget child;
-  final Offset initialOffset;
+  final PlayerModel player;
   final VoidCallback onPressed;
+  final Function(PlayerModel) onPointerUp;
   final GlobalKey parentKey;
 
   DraggableFloatingActionButton({
     required this.child,
-    required this.initialOffset,
+    required this.player,
     required this.onPressed,
+    required this.onPointerUp,
     required this.parentKey,
   });
 
@@ -30,8 +33,17 @@ class _DraggableFloatingActionButtonState
   @override
   void initState() {
     super.initState();
-    _offset = widget.initialOffset;
+    _initial();
+  }
 
+  @override
+  void didUpdateWidget(DraggableFloatingActionButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _initial();
+  }
+
+  void _initial() {
+    _offset = Offset(widget.player.dx, widget.player.dy);
     WidgetsBinding.instance?.addPostFrameCallback(_setBoundary);
   }
 
@@ -96,6 +108,10 @@ class _DraggableFloatingActionButtonState
             setState(() {
               _isDragging = false;
             });
+
+            widget.player.dx = _offset.dx;
+            widget.player.dy = _offset.dy;
+            widget.onPointerUp(widget.player);
           } else {
             widget.onPressed();
           }

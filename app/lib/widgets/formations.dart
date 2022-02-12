@@ -1,8 +1,9 @@
 import 'package:custom_view/custom_view.dart';
 import 'package:flutter/material.dart';
 import 'package:professorfc_app/features/home/domain/entities/enums/formation_enum.dart';
+import 'package:professorfc_app/features/home/presentation/bloc/home_cubit.dart';
 
-void showFormations(BuildContext context) {
+void showFormations(BuildContext context, HomeCubit homeCubit) {
   showMaterialModalBottomSheet(
     context: context,
     builder: (context) => CustomModalFit(
@@ -10,12 +11,23 @@ void showFormations(BuildContext context) {
         CustomItemModalFit(
           text: FormationEnum.formations[442]!,
           iconData: AppIcons.user,
-          onTap: () {},
+          onTap: () {
+            homeCubit.setFormation(442);
+          },
         ),
         CustomItemModalFit(
-          text: FormationEnum.formations[352]!,
+          text: FormationEnum.formations[4231]!,
           iconData: AppIcons.user,
-          onTap: () {},
+          onTap: () {
+            homeCubit.setFormation(4231);
+          },
+        ),
+        CustomItemModalFit(
+          text: FormationEnum.formations[4141]!,
+          iconData: AppIcons.user,
+          onTap: () {
+            homeCubit.setFormation(4141);
+          },
         ),
       ],
     ),

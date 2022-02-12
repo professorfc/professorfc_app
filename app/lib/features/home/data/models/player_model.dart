@@ -2,27 +2,34 @@ import 'package:professorfc_app/features/home/domain/entities/enums/position_enu
 import 'package:professorfc_app/features/home/domain/entities/player.dart';
 
 class PlayerModel extends Player {
-  const PlayerModel({
+  PlayerModel({
+    required String id,
     required String name,
     String? photo,
     required double dx,
     required double dy,
-    required PositionEnum position,
+    required List<PositionEnum> positions,
   }) : super(
+          id: id,
           name: name,
           photo: photo,
           dx: dx,
           dy: dy,
-          position: position,
+          positions: positions,
         );
 
   factory PlayerModel.fromJson(Map<String, dynamic> json) {
     return PlayerModel(
+      id: json['id'],
       name: json['name'],
       photo: json['photo'],
       dx: json['dx'],
       dy: json['dy'],
-      position: PositionEnum.values[json['position']],
+      positions: json['positions'] != null
+          ? (json['positions'] as List)
+              .map((e) => PositionEnum.values[json['positions']])
+              .toList()
+          : [],
     );
   }
 
@@ -39,11 +46,12 @@ class PlayerModel extends Player {
 
   PlayerModel copyWith() {
     return PlayerModel(
+      id: id,
       name: name,
       photo: photo,
       dx: dx,
       dy: dy,
-      position: position,
+      positions: positions,
     );
   }
 }

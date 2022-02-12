@@ -51,4 +51,14 @@ class HomeState extends DefaultState {
       forceRefresh: forceRefresh ?? this.forceRefresh,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        isLoading,
+        isSuccess,
+        isError,
+        isEmpty,
+        errorMessage,
+        forceRefresh,
+      ];
 }

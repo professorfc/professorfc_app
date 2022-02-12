@@ -62,7 +62,13 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FancyFab(
         beginButtonColor: Theme.of(context).backgroundColor,
         formmationCallback: () {
-          showFormations(context);
+          showFormations(context, _homeCubit);
+        },
+        saveFormmationCallback: () {
+          for (var player in _homeCubit.state.players!) {
+            print(
+                'PLAYER:${player.name} - DX:${player.dx} - DY:${player.dy} - ID:${player.id}');
+          }
         },
       ),
       bottomNavigationBar: CustomBottomNavigationBar(
@@ -82,22 +88,22 @@ class _HomePageState extends State<HomePage> {
   }
 
   List<Widget> _buildTeam(List<PlayerModel> players) {
-    return players.map<Widget>((e) {
+    return players.map<Widget>((player) {
       return DraggableFloatingActionButton(
-        child: PlayerItem(
-          player: e,
-          onTap: () {
-            showMaterialModalBottomSheet(
-              context: context,
-              builder: (context) => CustomModalFit(
-                items: _allPlayers(),
-              ),
-            );
-          },
-        ),
-        initialOffset: Offset(e.dx, e.dy),
+        child: PlayerItem(player: player),
+        player: player,
         parentKey: _parentKey,
-        onPressed: () {},
+        onPointerUp: (playerChanged) {
+          _homeCubit.updatePlayer(playerChanged);
+        },
+        onPressed: () {
+          showMaterialModalBottomSheet(
+            context: context,
+            builder: (context) => CustomModalFit(
+              items: _allPlayers(),
+            ),
+          );
+        },
       );
     }).toList();
   }
@@ -115,67 +121,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   List<CustomItemModalFit> _allPlayers() {
-    return [
-      CustomItemModalFit(
+    return List.generate(20, (index) {
+      return CustomItemModalFit(
         text: 'Jogador 1',
         iconData: AppIcons.user,
         onTap: () {},
-      ),
-      CustomItemModalFit(
-        text: 'Jogador 2',
-        iconData: AppIcons.user,
-        onTap: () {},
-      ),
-      CustomItemModalFit(
-        text: 'Jogador 1',
-        iconData: AppIcons.user,
-        onTap: () {},
-      ),
-      CustomItemModalFit(
-        text: 'Jogador 2',
-        iconData: AppIcons.user,
-        onTap: () {},
-      ),
-      CustomItemModalFit(
-        text: 'Jogador 1',
-        iconData: AppIcons.user,
-        onTap: () {},
-      ),
-      CustomItemModalFit(
-        text: 'Jogador 2',
-        iconData: AppIcons.user,
-        onTap: () {},
-      ),
-      CustomItemModalFit(
-        text: 'Jogador 1',
-        iconData: AppIcons.user,
-        onTap: () {},
-      ),
-      CustomItemModalFit(
-        text: 'Jogador 2',
-        iconData: AppIcons.user,
-        onTap: () {},
-      ),
-      CustomItemModalFit(
-        text: 'Jogador 1',
-        iconData: AppIcons.user,
-        onTap: () {},
-      ),
-      CustomItemModalFit(
-        text: 'Jogador 2',
-        iconData: AppIcons.user,
-        onTap: () {},
-      ),
-      CustomItemModalFit(
-        text: 'Jogador 1',
-        iconData: AppIcons.user,
-        onTap: () {},
-      ),
-      CustomItemModalFit(
-        text: 'Jogador 3',
-        iconData: AppIcons.user,
-        onTap: () {},
-      ),
-    ];
+      );
+    });
   }
 }

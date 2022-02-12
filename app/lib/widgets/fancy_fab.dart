@@ -8,6 +8,7 @@ class FancyFab extends StatefulWidget {
   final Color beginButtonColor;
 
   final VoidCallback formmationCallback;
+  final VoidCallback saveFormmationCallback;
 
   FancyFab({
     required this.beginButtonColor,
@@ -15,6 +16,7 @@ class FancyFab extends StatefulWidget {
     this.tooltip,
     this.icon,
     required this.formmationCallback,
+    required this.saveFormmationCallback,
   });
 
   @override
@@ -114,7 +116,7 @@ class _FancyFabState extends State<FancyFab>
 
   Widget save() {
     return FloatingActionButton(
-      onPressed: null,
+      onPressed: widget.saveFormmationCallback,
       backgroundColor: _overrideFloactingActionButtonTheme.backgroundColor,
       foregroundColor: _overrideFloactingActionButtonTheme.foregroundColor,
       tooltip: 'Save',

@@ -5,11 +5,36 @@ class FormationEnum {
         442: "4-4-2",
         4231: "4-2-3-1",
         4141: "4-1-4-1",
+        352: "3-5-2",
       };
 }
 
 class FormationPositionsEnum {
   static Map<int, List<PositionPlayer>> get formations => {
+        352: [
+          PositionPlayer(LineEnum.zeroLine, PositionEnum.goalkeeper,
+              dx: 159.6, dy: 523.8),
+          PositionPlayer(LineEnum.firstLine, PositionEnum.leftDefender,
+              dx: 76.2, dy: 436.6),
+          PositionPlayer(LineEnum.firstLine, PositionEnum.rightDefender,
+              dx: 258.9, dy: 434.9),
+          PositionPlayer(LineEnum.firstLine, PositionEnum.centerDefender,
+              dx: 164.8, dy: 437.8),
+          PositionPlayer(LineEnum.secondLine, PositionEnum.midfieldDefender,
+              dx: 98.7, dy: 304.8),
+          PositionPlayer(LineEnum.secondLine, PositionEnum.midfieldDefender,
+              dx: 230.3, dy: 303.4),
+          PositionPlayer(LineEnum.secondLine, PositionEnum.centerMidfield,
+              dx: 163.8, dy: 165.1),
+          PositionPlayer(LineEnum.secondLine, PositionEnum.rightMidfield,
+              dx: 303.0, dy: 207.0),
+          PositionPlayer(LineEnum.secondLine, PositionEnum.leftMidfield,
+              dx: 21.9, dy: 197.1),
+          PositionPlayer(LineEnum.thirdLine, PositionEnum.leftAttack,
+              dx: 98.5, dy: 86.2),
+          PositionPlayer(LineEnum.firstLine, PositionEnum.rightAttack,
+              dx: 213.1, dy: 86.0),
+        ],
         4141: [
           PositionPlayer(LineEnum.zeroLine, PositionEnum.goalkeeper,
               dx: 159.6, dy: 523.8),

@@ -29,6 +29,13 @@ void showFormations(BuildContext context, HomeCubit homeCubit) {
             homeCubit.setFormation(4141);
           },
         ),
+        CustomItemModalFit(
+          text: FormationEnum.formations[352]!,
+          iconData: AppIcons.user,
+          onTap: () {
+            homeCubit.setFormation(352);
+          },
+        ),
       ],
     ),
   );

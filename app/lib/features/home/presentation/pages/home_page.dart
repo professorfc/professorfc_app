@@ -25,7 +25,14 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _homeCubit = getItInstance.get<HomeCubit>()..getPlayers();
+
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    _homeCubit.setScreenSize(MediaQuery.of(context).size);
+    super.didChangeDependencies();
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:custom_utilities/custom_utilities.dart';
+import 'package:flutter/material.dart';
 import 'package:professorfc_app/features/home/data/models/player_model.dart';
 
 class HomeState extends DefaultState {
@@ -10,6 +11,7 @@ class HomeState extends DefaultState {
     String? errorMessage,
     this.players,
     this.forceRefresh,
+    this.screenSize,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -20,6 +22,7 @@ class HomeState extends DefaultState {
 
   final int? forceRefresh;
   final List<PlayerModel>? players;
+  final Size? screenSize;
 
   factory HomeState.initial() {
     return HomeState(
@@ -30,17 +33,20 @@ class HomeState extends DefaultState {
       errorMessage: null,
       players: const [],
       forceRefresh: null,
+      screenSize: null,
     );
   }
 
-  HomeState copyWith(
-      {bool? isLoading,
-      bool? isSuccess,
-      bool? isEmpty,
-      bool? isError,
-      String? errorMessage,
-      List<PlayerModel>? players,
-      int? forceRefresh}) {
+  HomeState copyWith({
+    bool? isLoading,
+    bool? isSuccess,
+    bool? isEmpty,
+    bool? isError,
+    String? errorMessage,
+    List<PlayerModel>? players,
+    int? forceRefresh,
+    Size? screenSize,
+  }) {
     return HomeState(
       isLoading: isLoading ?? this.isLoading,
       isSuccess: isSuccess ?? this.isSuccess,
@@ -49,6 +55,7 @@ class HomeState extends DefaultState {
       errorMessage: errorMessage ?? this.errorMessage,
       players: players ?? this.players,
       forceRefresh: forceRefresh ?? this.forceRefresh,
+      screenSize: screenSize ?? this.screenSize,
     );
   }
 
@@ -60,5 +67,6 @@ class HomeState extends DefaultState {
         isEmpty,
         errorMessage,
         forceRefresh,
+        screenSize,
       ];
 }

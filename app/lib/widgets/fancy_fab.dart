@@ -104,15 +104,16 @@ class _FancyFabState extends State<FancyFab>
     );
   }
 
-  Widget share() {
-    return FloatingActionButton(
-      onPressed: null,
-      backgroundColor: _overrideFloactingActionButtonTheme.backgroundColor,
-      foregroundColor: _overrideFloactingActionButtonTheme.foregroundColor,
-      tooltip: 'Share',
-      child: const Icon(AppIcons.share),
-    );
-  }
+  //TODO:in development
+  // Widget share() {
+  //   return FloatingActionButton(
+  //     onPressed: null,
+  //     backgroundColor: _overrideFloactingActionButtonTheme.backgroundColor,
+  //     foregroundColor: _overrideFloactingActionButtonTheme.foregroundColor,
+  //     tooltip: 'Share',
+  //     child: const Icon(AppIcons.share),
+  //   );
+  // }
 
   Widget save() {
     return FloatingActionButton(
@@ -154,14 +155,15 @@ class _FancyFabState extends State<FancyFab>
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
-        Transform(
-          transform: Matrix4.translationValues(
-            0.0,
-            _translateButton.value * 4.0,
-            0.0,
-          ),
-          child: share(),
-        ),
+        //TODO:in development
+        // Transform(
+        //   transform: Matrix4.translationValues(
+        //     0.0,
+        //     _translateButton.value * 4.0,
+        //     0.0,
+        //   ),
+        //   child: share(),
+        // ),
         Transform(
           transform: Matrix4.translationValues(
             0.0,

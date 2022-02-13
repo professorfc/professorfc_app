@@ -11,6 +11,7 @@ class Player extends Equatable {
     required this.lines,
     required this.startingPlayer,
     required this.positions,
+    this.positionNotFound = false,
   });
 
   final String id;
@@ -21,6 +22,7 @@ class Player extends Equatable {
   final List<LineEnum> lines;
   final bool startingPlayer;
   final List<PositionEnum> positions;
+  bool positionNotFound;
 
   @override
   List<Object?> get props => <Object?>[
@@ -32,5 +34,6 @@ class Player extends Equatable {
         lines,
         startingPlayer,
         positions,
+        positionNotFound,
       ];
 }

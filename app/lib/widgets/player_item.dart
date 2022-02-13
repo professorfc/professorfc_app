@@ -28,13 +28,16 @@ class PlayerItem extends StatelessWidget {
             ),
           ),
           SpacerBox.v4,
-          player.name.description(
-            context,
-            textAlign: TextAlign.center,
-            color: Theme.of(context).backgroundColor,
-            maxLines: 2,
-            fontSize: CustomFontSize.f13,
-          ),
+          player.name.toUpperCase().description(
+                context,
+                textAlign: TextAlign.center,
+                color: player.positionNotFound
+                    ? Colors.yellow
+                    : Theme.of(context).backgroundColor,
+                maxLines: 2,
+                fontSize: CustomFontSize.f13,
+                fontWeight: FontWeight.bold,
+              ),
         ],
       ),
     );

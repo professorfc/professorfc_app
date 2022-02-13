@@ -96,39 +96,59 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void setFormation(int formation) {
-    var _players = state.titularPlayers ?? [];
+    var _titularPlayers = state.titularPlayers ?? [];
     var _playersPositionChanged = <PlayerModel>[];
 
     List<PositionPlayer>? _positionPlayers =
         FormationPositionsEnum.formations[formation];
 
     if (_positionPlayers != null) {
-      for (PositionPlayer positionPlayer in _positionPlayers) {
-        int _index = _players.indexWhere(
-          (element) =>
-              element.lines.any((line) => line == positionPlayer.line) &&
-              element.positions
-                  .any((position) => position == positionPlayer.position) &&
-              !_playersPositionChanged.contains(element),
-        );
+      _setCoordinate(
+          _positionPlayers, _titularPlayers, _playersPositionChanged);
 
-        if (_index != -1) {
-          var _player = _players[_index];
+      List<PlayerModel> _titularPlayersPositionNotFound = _titularPlayers
+          .where((element) =>
+              !_playersPositionChanged.any((e) => e.id == element.id))
+          .toList();
 
-          _player.dx = CalculateCoordinates.getRelativeWidth(
-              state.screenSize!.width, positionPlayer.dx);
-
-          _player.dy = CalculateCoordinates.getRelativeHeight(
-              state.screenSize!.height, positionPlayer.dy);
-
-          _playersPositionChanged.add(_player);
-        }
+      for (var player in _titularPlayersPositionNotFound) {
+        player.positionNotFound = true;
       }
 
       emit(state.copyWith(
-        titularPlayers: _players,
+        titularPlayers: _titularPlayers,
         forceRefresh: StateUtils.generateRandomNumber() as int?,
       ));
+    }
+  }
+
+  void _setCoordinate(
+    List<PositionPlayer> _positionPlayers,
+    List<PlayerModel> _titularPlayers,
+    List<PlayerModel> _playersPositionChanged,
+  ) {
+    for (PositionPlayer positionPlayer in _positionPlayers) {
+      int _index = _titularPlayers.indexWhere(
+        (element) =>
+            element.lines.any((line) => line == positionPlayer.line) &&
+            element.positions
+                .any((position) => position == positionPlayer.position) &&
+            !_playersPositionChanged.contains(element),
+      );
+
+      if (_index != -1) {
+        var _player = _titularPlayers[_index];
+
+        _player.positionNotFound = false;
+
+        _player.dx = CalculateCoordinates.getRelativeWidth(
+            state.screenSize!.width, positionPlayer.dx);
+
+        _player.dy = CalculateCoordinates.getRelativeHeight(
+            state.screenSize!.height, positionPlayer.dy);
+
+        _playersPositionChanged.add(_player);
+      }
     }
   }
 }

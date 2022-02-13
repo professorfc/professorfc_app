@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
         saveFormmationCallback: () {
           for (var player in _homeCubit.state.titularPlayers!) {
             print(
-                'PLAYER:${player.name} - DX:${player.dx} - DY:${player.dy} - ID:${player.id}');
+                'PLAYER:${player.name} - DX:${player.dx} - DY:${player.dy} - ID:${player.id} - NF:${player.positionNotFound.toString()}');
           }
         },
       ),

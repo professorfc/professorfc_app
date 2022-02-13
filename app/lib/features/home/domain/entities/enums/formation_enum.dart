@@ -32,7 +32,7 @@ class FormationPositionsEnum {
               dx: 21.9, dy: 197.1),
           PositionPlayer(LineEnum.thirdLine, PositionEnum.leftAttack,
               dx: 98.5, dy: 86.2),
-          PositionPlayer(LineEnum.firstLine, PositionEnum.rightAttack,
+          PositionPlayer(LineEnum.thirdLine, PositionEnum.rightAttack,
               dx: 213.1, dy: 86.0),
         ],
         4141: [

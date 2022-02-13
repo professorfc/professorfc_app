@@ -11,6 +11,7 @@ class PlayerModel extends Player {
     required List<LineEnum> lines,
     required bool startingPlayer,
     required List<PositionEnum> positions,
+    bool positionNotFound = false,
   }) : super(
           id: id,
           name: name,
@@ -20,6 +21,7 @@ class PlayerModel extends Player {
           lines: lines,
           startingPlayer: startingPlayer,
           positions: positions,
+          positionNotFound: positionNotFound,
         );
 
   factory PlayerModel.fromJson(Map<String, dynamic> json) {
@@ -62,6 +64,7 @@ class PlayerModel extends Player {
       lines: lines,
       startingPlayer: startingPlayer,
       positions: positions,
+      positionNotFound: positionNotFound,
     );
   }
 }

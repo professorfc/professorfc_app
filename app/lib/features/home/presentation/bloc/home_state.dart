@@ -9,7 +9,8 @@ class HomeState extends DefaultState {
     bool? isError,
     bool? isSuccess,
     String? errorMessage,
-    this.players,
+    this.titularPlayers,
+    this.allPlayers,
     this.forceRefresh,
     this.screenSize,
   }) : super(
@@ -21,7 +22,8 @@ class HomeState extends DefaultState {
         );
 
   final int? forceRefresh;
-  final List<PlayerModel>? players;
+  final List<PlayerModel>? titularPlayers;
+  final List<PlayerModel>? allPlayers;
   final Size? screenSize;
 
   factory HomeState.initial() {
@@ -31,7 +33,8 @@ class HomeState extends DefaultState {
       isError: false,
       isLoading: false,
       errorMessage: null,
-      players: const [],
+      titularPlayers: const [],
+      allPlayers: const [],
       forceRefresh: null,
       screenSize: null,
     );
@@ -43,7 +46,8 @@ class HomeState extends DefaultState {
     bool? isEmpty,
     bool? isError,
     String? errorMessage,
-    List<PlayerModel>? players,
+    List<PlayerModel>? titularPlayers,
+    List<PlayerModel>? allPlayers,
     int? forceRefresh,
     Size? screenSize,
   }) {
@@ -53,7 +57,8 @@ class HomeState extends DefaultState {
       isEmpty: isEmpty ?? this.isEmpty,
       isError: isError ?? this.isError,
       errorMessage: errorMessage ?? this.errorMessage,
-      players: players ?? this.players,
+      titularPlayers: titularPlayers ?? this.titularPlayers,
+      allPlayers: allPlayers ?? this.allPlayers,
       forceRefresh: forceRefresh ?? this.forceRefresh,
       screenSize: screenSize ?? this.screenSize,
     );
@@ -67,6 +72,8 @@ class HomeState extends DefaultState {
         isEmpty,
         errorMessage,
         forceRefresh,
+        titularPlayers,
+        allPlayers,
         screenSize,
       ];
 }

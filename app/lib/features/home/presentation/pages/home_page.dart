@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
               return CustomCircularProgressIndicator(
                 color: Theme.of(context).backgroundColor,
               );
-            } else if (state.players!.isNotEmpty) {
+            } else if (state.titularPlayers!.isNotEmpty) {
               return Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Stack(
@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                   fit: StackFit.expand,
                   children: [
                     _buildBackground(),
-                    ..._buildTeam(state.players!),
+                    ..._buildTeam(state.titularPlayers!, state.allPlayers!),
                   ],
                 ),
               );
@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
           showFormations(context, _homeCubit);
         },
         saveFormmationCallback: () {
-          for (var player in _homeCubit.state.players!) {
+          for (var player in _homeCubit.state.titularPlayers!) {
             print(
                 'PLAYER:${player.name} - DX:${player.dx} - DY:${player.dy} - ID:${player.id}');
           }
@@ -94,8 +94,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  List<Widget> _buildTeam(List<PlayerModel> players) {
-    return players.map<Widget>((player) {
+  List<Widget> _buildTeam(
+      List<PlayerModel> titularPlayers, List<PlayerModel> allPlayers) {
+    return titularPlayers.map<Widget>((player) {
       return DraggableFloatingActionButton(
         child: PlayerItem(player: player),
         player: player,
@@ -107,7 +108,7 @@ class _HomePageState extends State<HomePage> {
           showMaterialModalBottomSheet(
             context: context,
             builder: (context) => CustomModalFit(
-              items: _allPlayers(),
+              items: _allPlayers(allPlayers),
             ),
           );
         },
@@ -127,12 +128,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  List<CustomItemModalFit> _allPlayers() {
-    return List.generate(20, (index) {
+  List<CustomItemModalFit> _allPlayers(List<PlayerModel> allPlayers) {
+    return List.generate(allPlayers.length, (index) {
       return CustomItemModalFit(
-        text: 'Jogador 1',
+        text: allPlayers[index].name,
         iconData: AppIcons.user,
-        onTap: () {},
+        onTap: () {
+          allPlayers[index];
+        },
       );
     });
   }

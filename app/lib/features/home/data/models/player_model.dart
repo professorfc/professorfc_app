@@ -9,6 +9,7 @@ class PlayerModel extends Player {
     required double dx,
     required double dy,
     required List<PositionEnum> positions,
+    required bool startingPlayer,
   }) : super(
           id: id,
           name: name,
@@ -16,6 +17,7 @@ class PlayerModel extends Player {
           dx: dx,
           dy: dy,
           positions: positions,
+          startingPlayer: startingPlayer,
         );
 
   factory PlayerModel.fromJson(Map<String, dynamic> json) {
@@ -25,6 +27,7 @@ class PlayerModel extends Player {
       photo: json['photo'],
       dx: json['dx'],
       dy: json['dy'],
+      startingPlayer: json['startingPlayer'],
       positions: json['positions'] != null
           ? (json['positions'] as List)
               .map((e) => PositionEnum.values[json['positions']])
@@ -52,6 +55,7 @@ class PlayerModel extends Player {
       dx: dx,
       dy: dy,
       positions: positions,
+      startingPlayer: startingPlayer,
     );
   }
 }

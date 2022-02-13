@@ -9,6 +9,7 @@ class Player extends Equatable {
     required this.dx,
     required this.dy,
     required this.positions,
+    required this.startingPlayer,
   });
 
   final String id;
@@ -17,6 +18,7 @@ class Player extends Equatable {
   double dx;
   double dy;
   final List<PositionEnum> positions;
+  final bool startingPlayer;
 
   @override
   List<Object?> get props => <Object?>[
@@ -26,5 +28,6 @@ class Player extends Equatable {
         dx,
         dy,
         positions,
+        startingPlayer,
       ];
 }

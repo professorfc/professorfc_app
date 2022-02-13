@@ -45,13 +45,13 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void updatePlayer(PlayerModel player) {
-    var _players = state.players ?? [];
+    var _players = state.titularPlayers ?? [];
     var _index = _players.indexWhere((element) => element.id == player.id);
     if (_index != -1) {
       _players[_index] = player;
       emit(
         state.copyWith(
-          players: _players,
+          titularPlayers: _players,
           forceRefresh: StateUtils.generateRandomNumber() as int?,
         ),
       );
@@ -67,8 +67,11 @@ class HomeCubit extends Cubit<HomeState> {
     Either<List<PlayerModel>, Exception> _response =
         await homeRepository.getPlayers();
 
-    _response.fold((model) {
-      for (var item in model) {
+    _response.fold((allPlayers) {
+      var _titularPlayers =
+          allPlayers.where((element) => element.startingPlayer).toList();
+
+      for (var item in _titularPlayers) {
         item.dx = CalculateCoordinates.getRelativeWidth(
             state.screenSize!.width, item.dx);
 
@@ -80,7 +83,8 @@ class HomeCubit extends Cubit<HomeState> {
         isLoading: false,
         isError: false,
         isSuccess: false,
-        players: model,
+        titularPlayers: _titularPlayers,
+        allPlayers: allPlayers,
       ));
     }, (error) {
       emit(state.copyWith(
@@ -92,7 +96,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void setFormation(int formation) {
-    var _players = state.players ?? [];
+    var _players = state.titularPlayers ?? [];
     var _playersPositionChanged = <PlayerModel>[];
 
     List<PositionPlayer>? _positionPlayers =
@@ -121,7 +125,7 @@ class HomeCubit extends Cubit<HomeState> {
       }
 
       emit(state.copyWith(
-        players: _players,
+        titularPlayers: _players,
         forceRefresh: StateUtils.generateRandomNumber() as int?,
       ));
     }

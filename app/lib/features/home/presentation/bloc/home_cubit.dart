@@ -106,6 +106,7 @@ class HomeCubit extends Cubit<HomeState> {
       for (PositionPlayer positionPlayer in _positionPlayers) {
         int _index = _players.indexWhere(
           (element) =>
+              element.lines.any((line) => line == positionPlayer.line) &&
               element.positions
                   .any((position) => position == positionPlayer.position) &&
               !_playersPositionChanged.contains(element),

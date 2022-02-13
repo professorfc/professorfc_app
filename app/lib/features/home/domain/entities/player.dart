@@ -8,8 +8,9 @@ class Player extends Equatable {
     this.photo,
     required this.dx,
     required this.dy,
-    required this.positions,
+    required this.lines,
     required this.startingPlayer,
+    required this.positions,
   });
 
   final String id;
@@ -17,8 +18,9 @@ class Player extends Equatable {
   final String? photo;
   double dx;
   double dy;
-  final List<PositionEnum> positions;
+  final List<LineEnum> lines;
   final bool startingPlayer;
+  final List<PositionEnum> positions;
 
   @override
   List<Object?> get props => <Object?>[
@@ -27,7 +29,8 @@ class Player extends Equatable {
         photo,
         dx,
         dy,
-        positions,
+        lines,
         startingPlayer,
+        positions,
       ];
 }

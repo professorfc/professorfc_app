@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:custom_utilities/custom_utilities.dart';
 import 'package:professorfc_app/features/home/data/models/player_model.dart';
 import 'package:professorfc_app/features/home/domain/entities/enums/position_enum.dart';
+import 'package:professorfc_app/features/home/domain/entities/enums/position_group_enum.dart';
 
 abstract class HomeRemoteDataSource {
   Future<List<PlayerModel>> getPlayers();
@@ -26,6 +27,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Cássio",
         lines: [LineEnum.zeroLine],
         positions: [PositionEnum.goalkeeper],
+        positionGroup: PositionGroupEnum.goalkeepers,
         startingPlayer: true,
       ),
       PlayerModel(
@@ -35,6 +37,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Gil",
         lines: [LineEnum.firstLine],
         positions: [PositionEnum.leftDefender],
+        positionGroup: PositionGroupEnum.defenders,
         startingPlayer: true,
       ),
       PlayerModel(
@@ -44,6 +47,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "João Vitor",
         lines: [LineEnum.firstLine],
         positions: [PositionEnum.rightDefender],
+        positionGroup: PositionGroupEnum.defenders,
         startingPlayer: true,
       ),
       PlayerModel(
@@ -53,6 +57,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Fábio Santos",
         lines: [LineEnum.firstLine],
         positions: [PositionEnum.leftSide],
+        positionGroup: PositionGroupEnum.siders,
         startingPlayer: true,
       ),
       PlayerModel(
@@ -62,6 +67,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Fagner",
         lines: [LineEnum.firstLine],
         positions: [PositionEnum.rightSide],
+        positionGroup: PositionGroupEnum.siders,
         startingPlayer: true,
       ),
       PlayerModel(
@@ -71,6 +77,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Renato Augusto",
         lines: [LineEnum.secondLine],
         positions: [PositionEnum.centerMidfield],
+        positionGroup: PositionGroupEnum.midfields,
         startingPlayer: true,
       ),
       PlayerModel(
@@ -80,6 +87,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Giuliano",
         lines: [LineEnum.secondLine],
         positions: [PositionEnum.midfieldDefender],
+        positionGroup: PositionGroupEnum.midfields,
         startingPlayer: true,
       ),
       PlayerModel(
@@ -89,6 +97,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Paulinho",
         lines: [LineEnum.secondLine],
         positions: [PositionEnum.midfieldDefender, PositionEnum.centerMidfield],
+        positionGroup: PositionGroupEnum.midfields,
         startingPlayer: true,
       ),
       PlayerModel(
@@ -98,6 +107,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "William",
         lines: [LineEnum.secondLine],
         positions: [PositionEnum.rightMidfield],
+        positionGroup: PositionGroupEnum.midfields,
         startingPlayer: true,
       ),
       PlayerModel(
@@ -107,6 +117,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Roger Guedes",
         lines: [LineEnum.secondLine, LineEnum.thirdLine],
         positions: [PositionEnum.leftMidfield, PositionEnum.leftAttack],
+        positionGroup: PositionGroupEnum.attacks,
         startingPlayer: true,
       ),
       PlayerModel(
@@ -116,6 +127,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Jô",
         lines: [LineEnum.thirdLine],
         positions: [PositionEnum.centerAttack, PositionEnum.rightAttack],
+        positionGroup: PositionGroupEnum.attacks,
         startingPlayer: true,
       ),
     ];
@@ -138,6 +150,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Carlos Miguel",
         lines: [LineEnum.zeroLine],
         positions: [PositionEnum.goalkeeper],
+        positionGroup: PositionGroupEnum.goalkeepers,
         startingPlayer: false,
       ),
       PlayerModel(
@@ -147,6 +160,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Guilherme",
         lines: [LineEnum.zeroLine],
         positions: [PositionEnum.goalkeeper],
+        positionGroup: PositionGroupEnum.goalkeepers,
         startingPlayer: false,
       ),
       PlayerModel(
@@ -156,6 +170,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Mateus Donelli",
         lines: [LineEnum.zeroLine],
         positions: [PositionEnum.goalkeeper],
+        positionGroup: PositionGroupEnum.goalkeepers,
         startingPlayer: false,
       ),
       PlayerModel(
@@ -165,6 +180,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Danilo Avelar",
         lines: [LineEnum.firstLine],
         positions: [PositionEnum.leftDefender],
+        positionGroup: PositionGroupEnum.defenders,
         startingPlayer: false,
       ),
       PlayerModel(
@@ -174,6 +190,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Robson Bambu",
         lines: [LineEnum.firstLine],
         positions: [PositionEnum.rightDefender],
+        positionGroup: PositionGroupEnum.defenders,
         startingPlayer: false,
       ),
       PlayerModel(
@@ -183,6 +200,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Raul Gustavo",
         lines: [LineEnum.firstLine],
         positions: [PositionEnum.leftDefender],
+        positionGroup: PositionGroupEnum.defenders,
         startingPlayer: false,
       ),
       PlayerModel(
@@ -192,6 +210,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Bruno Melo",
         lines: [LineEnum.firstLine],
         positions: [PositionEnum.rightSide],
+        positionGroup: PositionGroupEnum.siders,
         startingPlayer: false,
       ),
       PlayerModel(
@@ -201,6 +220,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "João Pedro",
         lines: [LineEnum.firstLine],
         positions: [PositionEnum.leftSide],
+        positionGroup: PositionGroupEnum.siders,
         startingPlayer: false,
       ),
       PlayerModel(
@@ -210,6 +230,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Lucas Piton",
         lines: [LineEnum.firstLine],
         positions: [PositionEnum.rightSide],
+        positionGroup: PositionGroupEnum.siders,
         startingPlayer: false,
       ),
       PlayerModel(
@@ -219,6 +240,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Adson",
         lines: [LineEnum.secondLine],
         positions: [PositionEnum.leftMidfield],
+        positionGroup: PositionGroupEnum.midfields,
         startingPlayer: false,
       ),
       PlayerModel(
@@ -228,6 +250,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Cantillo",
         lines: [LineEnum.secondLine],
         positions: [PositionEnum.midfieldDefender],
+        positionGroup: PositionGroupEnum.midfields,
         startingPlayer: false,
       ),
       PlayerModel(
@@ -237,6 +260,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Du Queiroz",
         lines: [LineEnum.secondLine],
         positions: [PositionEnum.midfieldDefender],
+        positionGroup: PositionGroupEnum.midfields,
         startingPlayer: false,
       ),
       PlayerModel(
@@ -246,6 +270,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Gabriel",
         lines: [LineEnum.secondLine],
         positions: [PositionEnum.midfieldDefender],
+        positionGroup: PositionGroupEnum.midfields,
         startingPlayer: false,
       ),
       PlayerModel(
@@ -255,6 +280,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Luan",
         lines: [LineEnum.secondLine],
         positions: [PositionEnum.centerMidfield],
+        positionGroup: PositionGroupEnum.midfields,
         startingPlayer: false,
       ),
       PlayerModel(
@@ -264,6 +290,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Gabriel Pereira",
         lines: [LineEnum.secondLine],
         positions: [PositionEnum.rightMidfield],
+        positionGroup: PositionGroupEnum.midfields,
         startingPlayer: false,
       ),
       PlayerModel(
@@ -273,6 +300,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Gustavo Mantuan",
         lines: [LineEnum.secondLine],
         positions: [PositionEnum.leftMidfield],
+        positionGroup: PositionGroupEnum.midfields,
         startingPlayer: false,
       ),
       PlayerModel(
@@ -282,6 +310,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Roni",
         lines: [LineEnum.secondLine],
         positions: [PositionEnum.centerMidfield],
+        positionGroup: PositionGroupEnum.midfields,
         startingPlayer: false,
       ),
       PlayerModel(
@@ -291,6 +320,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Ruan Oliveira",
         lines: [LineEnum.secondLine],
         positions: [PositionEnum.midfieldDefender],
+        positionGroup: PositionGroupEnum.midfields,
         startingPlayer: false,
       ),
       PlayerModel(
@@ -300,6 +330,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Xavier",
         lines: [LineEnum.secondLine],
         positions: [PositionEnum.midfieldDefender],
+        positionGroup: PositionGroupEnum.midfields,
         startingPlayer: false,
       ),
       PlayerModel(
@@ -309,6 +340,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         name: "Gustavo Silva",
         lines: [LineEnum.secondLine],
         positions: [PositionEnum.rightMidfield],
+        positionGroup: PositionGroupEnum.attacks,
         startingPlayer: false,
       ),
     ];

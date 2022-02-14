@@ -44,14 +44,42 @@ class HomeCubit extends Cubit<HomeState> {
     emit(state.copyWith(screenSize: size));
   }
 
-  void updatePlayer(PlayerModel player) {
-    var _players = state.titularPlayers ?? [];
-    var _index = _players.indexWhere((element) => element.id == player.id);
+  void updatePlayer(PlayerModel fromPlayer, PlayerModel toPlayer) {
+    var _titularPlayers = state.titularPlayers ?? [];
+
+    var _indexInTitularPlayer =
+        _titularPlayers.indexWhere((element) => element.id == toPlayer.id);
+
+    if (_indexInTitularPlayer != -1) {
+      return;
+    }
+
+    var _indexFrom =
+        _titularPlayers.indexWhere((element) => element.id == fromPlayer.id);
+
+    toPlayer.dx = fromPlayer.dx;
+    toPlayer.dy = fromPlayer.dy;
+    toPlayer.positionNotFound = false;
+
+    _titularPlayers[_indexFrom] = toPlayer;
+
+    emit(
+      state.copyWith(
+        titularPlayers: _titularPlayers,
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
+      ),
+    );
+  }
+
+  void updatePositionPlayer(PlayerModel player) {
+    var _titularPlayers = state.titularPlayers ?? [];
+    var _index =
+        _titularPlayers.indexWhere((element) => element.id == player.id);
     if (_index != -1) {
-      _players[_index] = player;
+      _titularPlayers[_index] = player;
       emit(
         state.copyWith(
-          titularPlayers: _players,
+          titularPlayers: _titularPlayers,
           forceRefresh: StateUtils.generateRandomNumber() as int?,
         ),
       );

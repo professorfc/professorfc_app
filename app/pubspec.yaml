@@ -25,6 +25,7 @@ dependencies:
     #   url: https://github.com/pesquisaedesenvolvimento/custom_utilities.git
     #   ref: main
     path: ../../custom_utilities
+  collection: ^1.15.0
 
 dev_dependencies:
   flutter_test:

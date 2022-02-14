@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:professorfc_app/features/home/domain/entities/enums/position_enum.dart';
+import 'package:professorfc_app/features/home/domain/entities/enums/position_group_enum.dart';
 
 class Player extends Equatable {
   Player({
@@ -11,6 +12,7 @@ class Player extends Equatable {
     required this.lines,
     required this.startingPlayer,
     required this.positions,
+    required this.positionGroup,
     this.positionNotFound = false,
   });
 
@@ -22,6 +24,7 @@ class Player extends Equatable {
   final List<LineEnum> lines;
   final bool startingPlayer;
   final List<PositionEnum> positions;
+  final PositionGroupEnum positionGroup;
   bool positionNotFound;
 
   @override
@@ -35,5 +38,6 @@ class Player extends Equatable {
         startingPlayer,
         positions,
         positionNotFound,
+        positionGroup,
       ];
 }

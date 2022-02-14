@@ -10,6 +10,7 @@ import 'package:professorfc_app/widgets/draggable_floating_action_button.dart';
 import 'package:professorfc_app/widgets/fancy_fab.dart';
 import 'package:professorfc_app/widgets/formations.dart';
 import 'package:professorfc_app/widgets/player_item.dart';
+import "package:collection/collection.dart";
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -102,13 +103,13 @@ class _HomePageState extends State<HomePage> {
         player: player,
         parentKey: _parentKey,
         onPointerUp: (playerChanged) {
-          _homeCubit.updatePlayer(playerChanged);
+          _homeCubit.updatePositionPlayer(playerChanged);
         },
         onPressed: () {
           showMaterialModalBottomSheet(
             context: context,
             builder: (context) => CustomModalFit(
-              items: _allPlayers(allPlayers),
+              items: _allPlayers(player, allPlayers),
             ),
           );
         },
@@ -128,15 +129,40 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  List<CustomItemModalFit> _allPlayers(List<PlayerModel> allPlayers) {
-    return List.generate(allPlayers.length, (index) {
-      return CustomItemModalFit(
-        text: allPlayers[index].name,
-        iconData: AppIcons.user,
-        onTap: () {
-          allPlayers[index];
-        },
+  List<Widget> _allPlayers(
+      PlayerModel fromPlayer, List<PlayerModel> allPlayers) {
+    var _list = <Widget>[];
+
+    var _groupBy =
+        allPlayers.groupListsBy((element) => element.positionGroup.value);
+
+    _groupBy.forEach((key, value) {
+      _list.add(
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              key.label(context),
+              const Divider(),
+              ...value
+                  .map(
+                    (element) => CustomItemModalFit(
+                      text: element.name,
+                      iconData: AppIcons.user,
+                      onTap: () {
+                        _homeCubit.updatePlayer(fromPlayer, element);
+                        Navigator.pop(context);
+                      },
+                    ),
+                  )
+                  .toList(),
+            ],
+          ),
+        ),
       );
     });
+
+    return _list;
   }
 }

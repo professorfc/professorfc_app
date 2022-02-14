@@ -1,4 +1,5 @@
 import 'package:professorfc_app/features/home/domain/entities/enums/position_enum.dart';
+import 'package:professorfc_app/features/home/domain/entities/enums/position_group_enum.dart';
 import 'package:professorfc_app/features/home/domain/entities/player.dart';
 
 class PlayerModel extends Player {
@@ -12,6 +13,7 @@ class PlayerModel extends Player {
     required bool startingPlayer,
     required List<PositionEnum> positions,
     bool positionNotFound = false,
+    required PositionGroupEnum positionGroup,
   }) : super(
           id: id,
           name: name,
@@ -22,6 +24,7 @@ class PlayerModel extends Player {
           startingPlayer: startingPlayer,
           positions: positions,
           positionNotFound: positionNotFound,
+          positionGroup: positionGroup,
         );
 
   factory PlayerModel.fromJson(Map<String, dynamic> json) {
@@ -32,6 +35,7 @@ class PlayerModel extends Player {
       dx: json['dx'],
       dy: json['dy'],
       startingPlayer: json['startingPlayer'],
+      positionGroup: PositionGroupEnum(json['positionGroup']),
       positions: json['positions'] != null
           ? (json['positions'] as List)
               .map((e) => PositionEnum.values[e])
@@ -65,6 +69,7 @@ class PlayerModel extends Player {
       startingPlayer: startingPlayer,
       positions: positions,
       positionNotFound: positionNotFound,
+      positionGroup: positionGroup,
     );
   }
 }

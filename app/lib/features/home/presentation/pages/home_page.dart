@@ -108,8 +108,10 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           showMaterialModalBottomSheet(
             context: context,
-            builder: (context) => CustomModalFit(
-              items: _allPlayers(player, allPlayers),
+            builder: (context) => SafeArea(
+              child: CustomModalFit(
+                items: _allPlayers(player, allPlayers),
+              ),
             ),
           );
         },

@@ -37,12 +37,13 @@ Future setup() async {
 
 void _setupRemoteClientRepository() {
   Dio _dio = Dio();
-  (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-      (HttpClient client) {
-    client.badCertificateCallback =
-        (X509Certificate cert, String host, int port) => true;
-    return client;
-  };
+  //TODO:in development
+  // (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+  //     (HttpClient client) {
+  //   client.badCertificateCallback =
+  //       (X509Certificate cert, String host, int port) => true;
+  //   return client;
+  // };
 
   getItInstance.registerLazySingleton<RemoteClientRepository>(
       () => RemoteClientRepository(

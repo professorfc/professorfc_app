@@ -2,11 +2,13 @@ import 'dart:math';
 
 import 'package:custom_utilities/custom_utilities.dart';
 import 'package:professorfc_app/features/home/data/models/player_model.dart';
+import 'package:professorfc_app/features/home/domain/entities/enums/formation_enum.dart';
 import 'package:professorfc_app/features/home/domain/entities/enums/position_enum.dart';
 import 'package:professorfc_app/features/home/domain/entities/enums/position_group_enum.dart';
 
 abstract class HomeRemoteDataSource {
   Future<List<PlayerModel>> getPlayers();
+  Future<List<int>> getFormations();
 }
 
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
@@ -344,5 +346,10 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         startingPlayer: false,
       ),
     ];
+  }
+
+  @override
+  Future<List<int>> getFormations() {
+    return Future.value(FormationEnum.formations.keys.toList());
   }
 }

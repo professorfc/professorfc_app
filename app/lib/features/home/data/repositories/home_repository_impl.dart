@@ -19,4 +19,14 @@ class HomeRepositoryImpl implements HomeRepository {
       return Right<List<PlayerModel>, Exception>(e);
     }
   }
+
+  @override
+  Future<Either<List<int>, Exception>> getFormations() async {
+    try {
+      var response = await remoteDataSource.getFormations();
+      return Left<List<int>, Exception>(response);
+    } on dynamic catch (e) {
+      return Right<List<int>, Exception>(e);
+    }
+  }
 }

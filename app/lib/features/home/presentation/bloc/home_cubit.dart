@@ -6,34 +6,7 @@ import 'package:professorfc_app/features/home/domain/entities/enums/formation_en
 import 'package:professorfc_app/features/home/domain/repositories/home_repository.dart';
 import 'home_state.dart';
 
-class CalculateCoordinates {
-  static const double _width_base = 411.4;
-  static const double _height_base = 683.4;
-
-  static double getRelativeWidth(double screenWidth, double value) {
-    double fromValue1 = _width_base;
-    double toValue1 = value;
-
-    double fromValue2 = screenWidth;
-    double? toValue2;
-
-    toValue2 = (fromValue2 * toValue1) / fromValue1;
-
-    return toValue2;
-  }
-
-  static double getRelativeHeight(double screenHeight, double value) {
-    double fromValue1 = _height_base;
-    double toValue1 = value;
-
-    double fromValue2 = screenHeight;
-    double? toValue2;
-
-    toValue2 = (fromValue2 * toValue1) / fromValue1;
-
-    return toValue2;
-  }
-}
+part 'calculate_coordenate.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.homeRepository) : super(HomeState.initial());
@@ -84,6 +57,26 @@ class HomeCubit extends Cubit<HomeState> {
         ),
       );
     }
+  }
+
+  void getFormations() async {
+    Either<List<int>, Exception> _response =
+        await homeRepository.getFormations();
+
+    _response.fold((formaations) {
+      emit(state.copyWith(
+        isLoading: false,
+        isError: false,
+        isSuccess: false,
+        formations: formaations,
+      ));
+    }, (error) {
+      emit(state.copyWith(
+        isLoading: false,
+        isError: true,
+        isSuccess: false,
+      ));
+    });
   }
 
   void getPlayers() async {

@@ -25,7 +25,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    _homeCubit = getItInstance.get<HomeCubit>()..getPlayers();
+    _homeCubit = getItInstance.get<HomeCubit>()
+      ..getPlayers()
+      ..getFormations();
 
     super.initState();
   }
@@ -42,43 +44,9 @@ class _HomePageState extends State<HomePage> {
       child: Container(
         color: const Color(0xff008001),
         constraints: const BoxConstraints.expand(),
-        child: BlocBuilder<HomeCubit, HomeState>(
-          bloc: _homeCubit,
-          builder: (context, state) {
-            if (state.isLoading == true) {
-              return CustomCircularProgressIndicator(
-                color: Theme.of(context).backgroundColor,
-              );
-            } else if (state.titularPlayers!.isNotEmpty) {
-              return Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Stack(
-                  key: _parentKey,
-                  fit: StackFit.expand,
-                  children: [
-                    _buildBackground(),
-                    ..._buildTeam(state.titularPlayers!, state.allPlayers!),
-                  ],
-                ),
-              );
-            }
-
-            return const SizedBox.shrink();
-          },
-        ),
+        child: _content(),
       ),
-      floatingActionButton: FancyFab(
-        beginButtonColor: Theme.of(context).backgroundColor,
-        formmationCallback: () {
-          showFormations(context, _homeCubit);
-        },
-        saveFormmationCallback: () {
-          for (var player in _homeCubit.state.titularPlayers!) {
-            print(
-                'PLAYER:${player.name} - DX:${player.dx} - DY:${player.dy} - ID:${player.id} - NF:${player.positionNotFound.toString()}');
-          }
-        },
-      ),
+      floatingActionButton: _actionButtons(),
       bottomNavigationBar: CustomBottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
@@ -92,6 +60,60 @@ class _HomePageState extends State<HomePage> {
         ],
         onTap: (int currentIndex) {},
       ),
+    );
+  }
+
+  BlocBuilder<HomeCubit, HomeState> _content() {
+    return BlocBuilder<HomeCubit, HomeState>(
+      bloc: _homeCubit,
+      builder: (context, state) {
+        if (state.isLoading == true) {
+          return CustomCircularProgressIndicator(
+            color: Theme.of(context).backgroundColor,
+          );
+        } else if (state.titularPlayers!.isNotEmpty) {
+          return Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Stack(
+              key: _parentKey,
+              fit: StackFit.expand,
+              children: [
+                _buildBackground(),
+                ..._buildTeam(state.titularPlayers!, state.allPlayers!),
+              ],
+            ),
+          );
+        }
+
+        return const SizedBox.shrink();
+      },
+    );
+  }
+
+  BlocBuilder<HomeCubit, HomeState> _actionButtons() {
+    return BlocBuilder<HomeCubit, HomeState>(
+      bloc: _homeCubit,
+      buildWhen: (previous, current) {
+        return previous.formations != current.formations;
+      },
+      builder: (context, state) {
+        if (state.formations!.isNotEmpty) {
+          return FancyFab(
+            beginButtonColor: Theme.of(context).backgroundColor,
+            formmationCallback: () {
+              showFormations(context, _homeCubit, state.formations!);
+            },
+            saveFormmationCallback: () {
+              for (var player in _homeCubit.state.titularPlayers!) {
+                print(
+                    'PLAYER:${player.name} - DX:${player.dx} - DY:${player.dy} - ID:${player.id} - NF:${player.positionNotFound.toString()}');
+              }
+            },
+          );
+        }
+
+        return const SizedBox.shrink();
+      },
     );
   }
 

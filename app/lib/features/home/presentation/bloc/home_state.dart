@@ -13,6 +13,7 @@ class HomeState extends DefaultState {
     this.allPlayers,
     this.forceRefresh,
     this.screenSize,
+    this.formations,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -25,6 +26,7 @@ class HomeState extends DefaultState {
   final List<PlayerModel>? titularPlayers;
   final List<PlayerModel>? allPlayers;
   final Size? screenSize;
+  final List<int>? formations;
 
   factory HomeState.initial() {
     return HomeState(
@@ -37,6 +39,7 @@ class HomeState extends DefaultState {
       allPlayers: const [],
       forceRefresh: null,
       screenSize: null,
+      formations: const [],
     );
   }
 
@@ -50,6 +53,7 @@ class HomeState extends DefaultState {
     List<PlayerModel>? allPlayers,
     int? forceRefresh,
     Size? screenSize,
+    List<int>? formations,
   }) {
     return HomeState(
       isLoading: isLoading ?? this.isLoading,
@@ -61,6 +65,7 @@ class HomeState extends DefaultState {
       allPlayers: allPlayers ?? this.allPlayers,
       forceRefresh: forceRefresh ?? this.forceRefresh,
       screenSize: screenSize ?? this.screenSize,
+      formations: formations ?? this.formations,
     );
   }
 
@@ -75,5 +80,6 @@ class HomeState extends DefaultState {
         titularPlayers,
         allPlayers,
         screenSize,
+        formations,
       ];
 }

@@ -120,12 +120,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildBackground() {
-    return const RotatedBox(
+    return RotatedBox(
       quarterTurns: 1,
       child: ClipPath(
         child: Image(
-          image: AssetImage("assets/images/camp_2.png"),
+          image: const AssetImage("assets/images/camp_2.png"),
           fit: BoxFit.fitHeight,
+          color: Colors.white.withOpacity(0.4),
+          colorBlendMode: BlendMode.modulate,
         ),
       ),
     );

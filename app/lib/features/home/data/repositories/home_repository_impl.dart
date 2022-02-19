@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:professorfc_app/features/home/data/datasources/home_remote_data_source.dart';
+import 'package:professorfc_app/features/home/data/models/formation_position_model.dart';
 import 'package:professorfc_app/features/home/data/models/team_model.dart';
 import 'package:professorfc_app/features/home/domain/repositories/home_repository.dart';
 
@@ -21,12 +22,13 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<Either<List<int>, Exception>> getFormations() async {
+  Future<Either<List<FormationPositionModel>, Exception>>
+      getFormations() async {
     try {
       var response = await remoteDataSource.getFormations();
-      return Left<List<int>, Exception>(response);
+      return Left<List<FormationPositionModel>, Exception>(response);
     } on dynamic catch (e) {
-      return Right<List<int>, Exception>(e);
+      return Right<List<FormationPositionModel>, Exception>(e);
     }
   }
 }

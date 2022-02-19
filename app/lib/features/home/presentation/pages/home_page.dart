@@ -94,14 +94,14 @@ class _HomePageState extends State<HomePage> {
     return BlocBuilder<HomeCubit, HomeState>(
       bloc: _homeCubit,
       buildWhen: (previous, current) {
-        return previous.formations != current.formations;
+        return previous.formationPositions != current.formationPositions;
       },
       builder: (context, state) {
-        if (state.formations!.isNotEmpty) {
+        if (state.formationPositions!.isNotEmpty) {
           return FancyFab(
             beginButtonColor: Theme.of(context).backgroundColor,
             formmationCallback: () {
-              showFormations(context, _homeCubit, state.formations!);
+              showFormations(context, _homeCubit, state.formationPositions!);
             },
             saveFormmationCallback: () {
               for (var player in _homeCubit.state.titularPlayers!) {

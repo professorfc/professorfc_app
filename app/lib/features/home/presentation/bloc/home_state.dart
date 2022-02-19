@@ -1,5 +1,6 @@
 import 'package:custom_utilities/custom_utilities.dart';
 import 'package:flutter/material.dart';
+import 'package:professorfc_app/features/home/data/models/formation_position_model.dart';
 import 'package:professorfc_app/features/home/data/models/player_model.dart';
 import 'package:professorfc_app/features/home/data/models/team_model.dart';
 
@@ -14,8 +15,8 @@ class HomeState extends DefaultState {
     this.allPlayers,
     this.forceRefresh,
     this.screenSize,
-    this.formations,
     this.team,
+    this.formationPositions,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -28,8 +29,8 @@ class HomeState extends DefaultState {
   final List<PlayerModel>? titularPlayers;
   final List<PlayerModel>? allPlayers;
   final Size? screenSize;
-  final List<int>? formations;
   final TeamModel? team;
+  final List<FormationPositionModel>? formationPositions;
 
   factory HomeState.initial() {
     return HomeState(
@@ -42,24 +43,23 @@ class HomeState extends DefaultState {
       allPlayers: const [],
       forceRefresh: null,
       screenSize: null,
-      formations: const [],
       team: null,
+      formationPositions: const [],
     );
   }
 
-  HomeState copyWith({
-    bool? isLoading,
-    bool? isSuccess,
-    bool? isEmpty,
-    bool? isError,
-    String? errorMessage,
-    List<PlayerModel>? titularPlayers,
-    List<PlayerModel>? allPlayers,
-    int? forceRefresh,
-    Size? screenSize,
-    List<int>? formations,
-    TeamModel? team,
-  }) {
+  HomeState copyWith(
+      {bool? isLoading,
+      bool? isSuccess,
+      bool? isEmpty,
+      bool? isError,
+      String? errorMessage,
+      List<PlayerModel>? titularPlayers,
+      List<PlayerModel>? allPlayers,
+      int? forceRefresh,
+      Size? screenSize,
+      TeamModel? team,
+      List<FormationPositionModel>? formationPositions}) {
     return HomeState(
       isLoading: isLoading ?? this.isLoading,
       isSuccess: isSuccess ?? this.isSuccess,
@@ -70,8 +70,8 @@ class HomeState extends DefaultState {
       allPlayers: allPlayers ?? this.allPlayers,
       forceRefresh: forceRefresh ?? this.forceRefresh,
       screenSize: screenSize ?? this.screenSize,
-      formations: formations ?? this.formations,
       team: team ?? this.team,
+      formationPositions: formationPositions ?? this.formationPositions,
     );
   }
 
@@ -86,7 +86,7 @@ class HomeState extends DefaultState {
         titularPlayers,
         allPlayers,
         screenSize,
-        formations,
         team,
+        formationPositions,
       ];
 }

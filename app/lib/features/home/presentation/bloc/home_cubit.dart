@@ -3,9 +3,10 @@ import 'dart:convert';
 import 'package:custom_utilities/custom_utilities.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:professorfc_app/features/home/data/models/formation_position_model.dart';
 import 'package:professorfc_app/features/home/data/models/player_model.dart';
+import 'package:professorfc_app/features/home/data/models/position_player_model.dart';
 import 'package:professorfc_app/features/home/data/models/team_model.dart';
-import 'package:professorfc_app/features/home/domain/entities/enums/formation_enum.dart';
 import 'package:professorfc_app/features/home/domain/repositories/home_repository.dart';
 import 'home_state.dart';
 
@@ -18,8 +19,12 @@ class HomeCubit extends Cubit<HomeState> {
 
   void save() {
     try {
-      var _json = jsonEncode(state.team!.toJson());
-      print(_json);
+      var _jsonTeam = jsonEncode(state.team!.toJson());
+      print(_jsonTeam);
+
+      var _jsonFormationPositions =
+          jsonEncode(state.formationPositions!.map((e) => e.toJson()).toList());
+      print(_jsonFormationPositions);
     } catch (e) {
       print(e.toString());
     }
@@ -72,15 +77,15 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void getFormations() async {
-    Either<List<int>, Exception> _response =
+    Either<List<FormationPositionModel>, Exception> _response =
         await homeRepository.getFormations();
 
-    _response.fold((formaations) {
+    _response.fold((model) {
       emit(state.copyWith(
         isLoading: false,
         isError: false,
         isSuccess: false,
-        formations: formaations,
+        formationPositions: model,
       ));
     }, (error) {
       emit(state.copyWith(
@@ -130,39 +135,38 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
-  void setFormation(int formation) {
+  void setFormation(String id) {
     var _titularPlayers = state.titularPlayers ?? [];
     var _playersPositionChanged = <PlayerModel>[];
 
-    List<PositionPlayer>? _positionPlayers =
-        FormationPositionsEnum.formations[formation];
+    var _formationPositions =
+        state.formationPositions!.firstWhere((element) => element.id == id);
 
-    if (_positionPlayers != null) {
-      _setCoordinate(
-          _positionPlayers, _titularPlayers, _playersPositionChanged);
+    _setCoordinate(
+        _formationPositions, _titularPlayers, _playersPositionChanged);
 
-      List<PlayerModel> _titularPlayersPositionNotFound = _titularPlayers
-          .where((element) =>
-              !_playersPositionChanged.any((e) => e.id == element.id))
-          .toList();
+    List<PlayerModel> _titularPlayersPositionNotFound = _titularPlayers
+        .where((element) =>
+            !_playersPositionChanged.any((e) => e.id == element.id))
+        .toList();
 
-      for (var player in _titularPlayersPositionNotFound) {
-        player.positionNotFound = true;
-      }
-
-      emit(state.copyWith(
-        titularPlayers: _titularPlayers,
-        forceRefresh: StateUtils.generateRandomNumber() as int?,
-      ));
+    for (var player in _titularPlayersPositionNotFound) {
+      player.positionNotFound = true;
     }
+
+    emit(state.copyWith(
+      titularPlayers: _titularPlayers,
+      forceRefresh: StateUtils.generateRandomNumber() as int?,
+    ));
   }
 
   void _setCoordinate(
-    List<PositionPlayer> _positionPlayers,
+    FormationPositionModel _formationPosition,
     List<PlayerModel> _titularPlayers,
     List<PlayerModel> _playersPositionChanged,
   ) {
-    for (PositionPlayer positionPlayer in _positionPlayers) {
+    for (PositionPlayerModel positionPlayer
+        in _formationPosition.positionPlayers) {
       int _index = _titularPlayers.indexWhere(
         (element) =>
             element.lines.any((line) => line == positionPlayer.line) &&

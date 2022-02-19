@@ -96,7 +96,7 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
-  void getPlayers() async {
+  void getTeam() async {
     emit(state.copyWith(
       isLoading: true,
       forceRefresh: StateUtils.generateRandomNumber() as int?,
@@ -105,27 +105,7 @@ class HomeCubit extends Cubit<HomeState> {
     Either<TeamModel, Exception> _response = await homeRepository.getTeam();
 
     _response.fold((team) {
-      var _titularPlayers = team.holders as List<PlayerModel>;
-
-      for (var item in _titularPlayers) {
-        item.dx = CalculateCoordinates.getRelativeWidth(
-            state.screenSize!.width, item.dx);
-
-        item.dy = CalculateCoordinates.getRelativeHeight(
-            state.screenSize!.height, item.dy);
-      }
-
-      emit(state.copyWith(
-        isLoading: false,
-        isError: false,
-        isSuccess: false,
-        team: team,
-        titularPlayers: _titularPlayers,
-        allPlayers: <PlayerModel>[
-          ...team.holders as List<PlayerModel>,
-          ...team.reservers as List<PlayerModel>
-        ],
-      ));
+      setTeam(team);
     }, (error) {
       emit(state.copyWith(
         isLoading: false,
@@ -133,6 +113,30 @@ class HomeCubit extends Cubit<HomeState> {
         isSuccess: false,
       ));
     });
+  }
+
+  void setTeam(TeamModel team) {
+    var _titularPlayers = team.holders;
+
+    for (var item in _titularPlayers) {
+      item.dx = CalculateCoordinates.getRelativeWidth(
+          state.screenSize!.width, item.dx);
+
+      item.dy = CalculateCoordinates.getRelativeHeight(
+          state.screenSize!.height, item.dy);
+    }
+
+    emit(state.copyWith(
+      isLoading: false,
+      isError: false,
+      isSuccess: false,
+      team: team,
+      titularPlayers: _titularPlayers,
+      allPlayers: <PlayerModel>[
+        ...team.holders,
+        ...team.reservers,
+      ],
+    ));
   }
 
   void setFormation(String id) {

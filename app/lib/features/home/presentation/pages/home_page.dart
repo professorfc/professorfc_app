@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     _searchTeamsCubit = getItInstance.get<SearchTeamsCubit>()..getTeams();
 
     _homeCubit = getItInstance.get<HomeCubit>()
-      ..getPlayers()
+      ..getTeam()
       ..getFormations();
 
     super.initState();
@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> {
           return FancyFab(
             beginButtonColor: Theme.of(context).backgroundColor,
             searchTeamsCallback: () {
-              showSearchTeams(context, _searchTeamsCubit);
+              showSearchTeams(context, _homeCubit, _searchTeamsCubit);
             },
             formmationCallback: () {
               showFormations(context, _homeCubit, state.formationPositions!);

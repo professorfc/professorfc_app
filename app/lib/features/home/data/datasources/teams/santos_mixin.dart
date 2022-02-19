@@ -10,8 +10,6 @@ mixin SantosTeamMockMixin {
     _allPlayers.addAll(_getMidfields());
     _allPlayers.addAll(_getAttacks());
 
-    _allPlayers.sort((a, b) => a.name.compareTo(b.name));
-
     int _base = 100000;
     Random _ran = Random();
     TeamModel model = TeamModel(

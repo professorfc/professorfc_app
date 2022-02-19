@@ -174,6 +174,8 @@ class _HomePageState extends State<HomePage> {
 
     _groupBy.forEach(
       (key, value) {
+        value.sort((a, b) => a.name.compareTo(b.name));
+
         _list.add(
           Padding(
             padding: const EdgeInsets.all(8.0),

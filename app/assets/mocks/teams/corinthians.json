@@ -169,7 +169,7 @@
       },
       {
          "id":"73099",
-         "name":"William",
+         "name":"Willian",
          "photo":null,
          "dx":313.7217862351552,
          "dy":115.20481625486016,
@@ -268,22 +268,6 @@
       {
          "id":"13384",
          "name":"Du Queiroz",
-         "photo":null,
-         "dx":0.0,
-         "dy":0.0,
-         "lines":[
-            2
-         ],
-         "startingPlayer":false,
-         "positions":[
-            6
-         ],
-         "positionNotFound":false,
-         "positionGroup":"Meias"
-      },
-      {
-         "id":"51873",
-         "name":"Gabriel",
          "photo":null,
          "dx":0.0,
          "dy":0.0,

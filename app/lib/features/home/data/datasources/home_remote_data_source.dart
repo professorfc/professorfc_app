@@ -10,7 +10,8 @@ import 'package:professorfc_app/features/home/domain/entities/enums/position_enu
 import 'package:professorfc_app/features/home/domain/entities/enums/position_group_enum.dart';
 import 'package:professorfc_app/shared/load_mock.dart';
 
-part 'team_mixin.dart';
+part './teams/sao_paulo_mixin.dart';
+part './teams/corinthians_mixin.dart';
 part 'formation_position_mixin.dart';
 
 abstract class HomeRemoteDataSource {
@@ -19,7 +20,7 @@ abstract class HomeRemoteDataSource {
 }
 
 class HomeRemoteDataSourceImpl
-    with TeamMockMixin, FormationPositionMixin
+    with SaoPauloTeamMockMixin, FormationPositionMixin
     implements HomeRemoteDataSource {
   HomeRemoteDataSourceImpl(this.remoteClientRepository);
 
@@ -27,8 +28,10 @@ class HomeRemoteDataSourceImpl
 
   @override
   Future<TeamModel> getTeam() async {
-    var response = await LoadMock.fromAsset("teams/corinthians.json");
-    return Future.value(TeamModel.fromJson(response));
+    // var response = await LoadMock.fromAsset("teams/corinthians.json");
+    // return Future.value(TeamModel.fromJson(response));
+
+    return getTeamFromModel();
   }
 
   @override

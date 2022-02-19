@@ -1,9 +1,14 @@
-part of './home_remote_data_source.dart';
+part of '../home_remote_data_source.dart';
 
-mixin TeamMockMixin {
+mixin CorithiansTeamMockMixin {
   Future<TeamModel> getTeamFromModel() {
-    var _allPlayers = _getHoldersPlayers();
-    _allPlayers.addAll(_getReservePlayers());
+    var _allPlayers = <PlayerModel>[];
+
+    _allPlayers.addAll(_getGoalkeeper());
+    _allPlayers.addAll(_getDefender());
+    _allPlayers.addAll(_getSide());
+    _allPlayers.addAll(_getMidfields());
+    _allPlayers.addAll(_getAttacks());
 
     _allPlayers.sort((a, b) => a.name.compareTo(b.name));
 
@@ -26,7 +31,7 @@ mixin TeamMockMixin {
     return Future.value(model);
   }
 
-  List<PlayerModel> _getHoldersPlayers() {
+  List<PlayerModel> _getGoalkeeper() {
     int _base = 100000;
     Random _ran = Random();
 
@@ -41,6 +46,44 @@ mixin TeamMockMixin {
         positionGroup: PositionGroupEnum.goalkeepers,
         startingPlayer: true,
       ),
+      PlayerModel(
+        id: _ran.nextInt(_base).toString(),
+        dx: 0,
+        dy: 0,
+        name: "Carlos Miguel",
+        lines: [LineEnum.zeroLine],
+        positions: [PositionEnum.goalkeeper],
+        positionGroup: PositionGroupEnum.goalkeepers,
+        startingPlayer: false,
+      ),
+      PlayerModel(
+        id: _ran.nextInt(_base).toString(),
+        dx: 0,
+        dy: 0,
+        name: "Guilherme",
+        lines: [LineEnum.zeroLine],
+        positions: [PositionEnum.goalkeeper],
+        positionGroup: PositionGroupEnum.goalkeepers,
+        startingPlayer: false,
+      ),
+      PlayerModel(
+        id: _ran.nextInt(_base).toString(),
+        dx: 0,
+        dy: 0,
+        name: "Mateus Donelli",
+        lines: [LineEnum.zeroLine],
+        positions: [PositionEnum.goalkeeper],
+        positionGroup: PositionGroupEnum.goalkeepers,
+        startingPlayer: false,
+      ),
+    ];
+  }
+
+  List<PlayerModel> _getDefender() {
+    int _base = 100000;
+    Random _ran = Random();
+
+    return [
       PlayerModel(
         id: _ran.nextInt(_base).toString(),
         dx: 105.2,
@@ -63,6 +106,44 @@ mixin TeamMockMixin {
       ),
       PlayerModel(
         id: _ran.nextInt(_base).toString(),
+        dx: 0,
+        dy: 0,
+        name: "Danilo Avelar",
+        lines: [LineEnum.firstLine],
+        positions: [PositionEnum.leftDefender],
+        positionGroup: PositionGroupEnum.defenders,
+        startingPlayer: false,
+      ),
+      PlayerModel(
+        id: _ran.nextInt(_base).toString(),
+        dx: 0,
+        dy: 0,
+        name: "Robson Bambu",
+        lines: [LineEnum.firstLine],
+        positions: [PositionEnum.rightDefender],
+        positionGroup: PositionGroupEnum.defenders,
+        startingPlayer: false,
+      ),
+      PlayerModel(
+        id: _ran.nextInt(_base).toString(),
+        dx: 0,
+        dy: 0,
+        name: "Raul Gustavo",
+        lines: [LineEnum.firstLine],
+        positions: [PositionEnum.leftDefender],
+        positionGroup: PositionGroupEnum.defenders,
+        startingPlayer: false,
+      ),
+    ];
+  }
+
+  List<PlayerModel> _getSide() {
+    int _base = 100000;
+    Random _ran = Random();
+
+    return [
+      PlayerModel(
+        id: _ran.nextInt(_base).toString(),
         dx: 30.4,
         dy: 345.7,
         name: "Fábio Santos",
@@ -81,6 +162,44 @@ mixin TeamMockMixin {
         positionGroup: PositionGroupEnum.siders,
         startingPlayer: true,
       ),
+      PlayerModel(
+        id: _ran.nextInt(_base).toString(),
+        dx: 0,
+        dy: 0,
+        name: "Bruno Melo",
+        lines: [LineEnum.firstLine],
+        positions: [PositionEnum.rightSide],
+        positionGroup: PositionGroupEnum.siders,
+        startingPlayer: false,
+      ),
+      PlayerModel(
+        id: _ran.nextInt(_base).toString(),
+        dx: 0,
+        dy: 0,
+        name: "João Pedro",
+        lines: [LineEnum.firstLine],
+        positions: [PositionEnum.leftSide],
+        positionGroup: PositionGroupEnum.siders,
+        startingPlayer: false,
+      ),
+      PlayerModel(
+        id: _ran.nextInt(_base).toString(),
+        dx: 0,
+        dy: 0,
+        name: "Lucas Piton",
+        lines: [LineEnum.firstLine],
+        positions: [PositionEnum.rightSide],
+        positionGroup: PositionGroupEnum.siders,
+        startingPlayer: false,
+      ),
+    ];
+  }
+
+  List<PlayerModel> _getMidfields() {
+    int _base = 100000;
+    Random _ran = Random();
+
+    return [
       PlayerModel(
         id: _ran.nextInt(_base).toString(),
         dx: 99.2,
@@ -120,123 +239,6 @@ mixin TeamMockMixin {
         positions: [PositionEnum.rightMidfield],
         positionGroup: PositionGroupEnum.midfields,
         startingPlayer: true,
-      ),
-      PlayerModel(
-        id: _ran.nextInt(_base).toString(),
-        dx: 17.4,
-        dy: 112.2,
-        name: "Roger Guedes",
-        lines: [LineEnum.secondLine, LineEnum.thirdLine],
-        positions: [PositionEnum.leftMidfield, PositionEnum.leftAttack],
-        positionGroup: PositionGroupEnum.attacks,
-        startingPlayer: true,
-      ),
-      PlayerModel(
-        id: _ran.nextInt(_base).toString(),
-        dx: 160.9,
-        dy: 51.4,
-        name: "Jô",
-        lines: [LineEnum.thirdLine],
-        positions: [PositionEnum.centerAttack, PositionEnum.rightAttack],
-        positionGroup: PositionGroupEnum.attacks,
-        startingPlayer: true,
-      ),
-    ];
-  }
-
-  List<PlayerModel> _getReservePlayers() {
-    int _base = 100000;
-    Random _ran = Random();
-    return [
-      PlayerModel(
-        id: _ran.nextInt(_base).toString(),
-        dx: 0,
-        dy: 0,
-        name: "Carlos Miguel",
-        lines: [LineEnum.zeroLine],
-        positions: [PositionEnum.goalkeeper],
-        positionGroup: PositionGroupEnum.goalkeepers,
-        startingPlayer: false,
-      ),
-      PlayerModel(
-        id: _ran.nextInt(_base).toString(),
-        dx: 0,
-        dy: 0,
-        name: "Guilherme",
-        lines: [LineEnum.zeroLine],
-        positions: [PositionEnum.goalkeeper],
-        positionGroup: PositionGroupEnum.goalkeepers,
-        startingPlayer: false,
-      ),
-      PlayerModel(
-        id: _ran.nextInt(_base).toString(),
-        dx: 0,
-        dy: 0,
-        name: "Mateus Donelli",
-        lines: [LineEnum.zeroLine],
-        positions: [PositionEnum.goalkeeper],
-        positionGroup: PositionGroupEnum.goalkeepers,
-        startingPlayer: false,
-      ),
-      PlayerModel(
-        id: _ran.nextInt(_base).toString(),
-        dx: 0,
-        dy: 0,
-        name: "Danilo Avelar",
-        lines: [LineEnum.firstLine],
-        positions: [PositionEnum.leftDefender],
-        positionGroup: PositionGroupEnum.defenders,
-        startingPlayer: false,
-      ),
-      PlayerModel(
-        id: _ran.nextInt(_base).toString(),
-        dx: 0,
-        dy: 0,
-        name: "Robson Bambu",
-        lines: [LineEnum.firstLine],
-        positions: [PositionEnum.rightDefender],
-        positionGroup: PositionGroupEnum.defenders,
-        startingPlayer: false,
-      ),
-      PlayerModel(
-        id: _ran.nextInt(_base).toString(),
-        dx: 0,
-        dy: 0,
-        name: "Raul Gustavo",
-        lines: [LineEnum.firstLine],
-        positions: [PositionEnum.leftDefender],
-        positionGroup: PositionGroupEnum.defenders,
-        startingPlayer: false,
-      ),
-      PlayerModel(
-        id: _ran.nextInt(_base).toString(),
-        dx: 0,
-        dy: 0,
-        name: "Bruno Melo",
-        lines: [LineEnum.firstLine],
-        positions: [PositionEnum.rightSide],
-        positionGroup: PositionGroupEnum.siders,
-        startingPlayer: false,
-      ),
-      PlayerModel(
-        id: _ran.nextInt(_base).toString(),
-        dx: 0,
-        dy: 0,
-        name: "João Pedro",
-        lines: [LineEnum.firstLine],
-        positions: [PositionEnum.leftSide],
-        positionGroup: PositionGroupEnum.siders,
-        startingPlayer: false,
-      ),
-      PlayerModel(
-        id: _ran.nextInt(_base).toString(),
-        dx: 0,
-        dy: 0,
-        name: "Lucas Piton",
-        lines: [LineEnum.firstLine],
-        positions: [PositionEnum.rightSide],
-        positionGroup: PositionGroupEnum.siders,
-        startingPlayer: false,
       ),
       PlayerModel(
         id: _ran.nextInt(_base).toString(),
@@ -337,6 +339,34 @@ mixin TeamMockMixin {
         positions: [PositionEnum.midfieldDefender],
         positionGroup: PositionGroupEnum.midfields,
         startingPlayer: false,
+      ),
+    ];
+  }
+
+  List<PlayerModel> _getAttacks() {
+    int _base = 100000;
+    Random _ran = Random();
+
+    return [
+      PlayerModel(
+        id: _ran.nextInt(_base).toString(),
+        dx: 17.4,
+        dy: 112.2,
+        name: "Roger Guedes",
+        lines: [LineEnum.secondLine, LineEnum.thirdLine],
+        positions: [PositionEnum.leftMidfield, PositionEnum.leftAttack],
+        positionGroup: PositionGroupEnum.attacks,
+        startingPlayer: true,
+      ),
+      PlayerModel(
+        id: _ran.nextInt(_base).toString(),
+        dx: 160.9,
+        dy: 51.4,
+        name: "Jô",
+        lines: [LineEnum.thirdLine],
+        positions: [PositionEnum.centerAttack, PositionEnum.rightAttack],
+        positionGroup: PositionGroupEnum.attacks,
+        startingPlayer: true,
       ),
       PlayerModel(
         id: _ran.nextInt(_base).toString(),

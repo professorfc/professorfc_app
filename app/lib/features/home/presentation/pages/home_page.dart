@@ -1,6 +1,8 @@
 import 'package:custom_utilities/custom_utilities.dart';
 import 'package:custom_view/custom_view.dart';
 import 'package:flutter/material.dart';
+import 'package:professorfc_app/features/ads/presentation/bloc/ads_cubit.dart';
+import 'package:professorfc_app/features/ads/presentation/pages/banners/banner_ad_widget.dart';
 import 'package:professorfc_app/features/home/data/models/player_model.dart';
 import 'package:professorfc_app/features/home/presentation/bloc/home_cubit.dart';
 import 'package:professorfc_app/features/home/presentation/bloc/home_state.dart';
@@ -22,11 +24,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey _parentKey = GlobalKey();
+
+  late AdsCubit _adsCubit;
   late HomeCubit _homeCubit;
   late SearchTeamsCubit _searchTeamsCubit;
 
   @override
   void initState() {
+    _adsCubit = root<AdsCubit>()..loadBanner(screenName: 'home', count: 1);
+
     _searchTeamsCubit = getItInstance.get<SearchTeamsCubit>()..getTeams();
 
     _homeCubit = getItInstance.get<HomeCubit>()
@@ -68,6 +74,49 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // Widget _content2() {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(4.0),
+  //     child: Stack(
+  //       key: _parentKey,
+  //       fit: StackFit.expand,
+  //       children: [
+  //         _buildBackground(),
+  //         BlocBuilder<HomeCubit, HomeState>(
+  //           bloc: _homeCubit,
+  //           builder: (context, state) {
+  //             if (state.isLoading == true) {
+  //               return Center(
+  //                 child: CustomCircularProgressIndicator(
+  //                   color: Theme.of(context).backgroundColor,
+  //                 ),
+  //               );
+  //             } else if (state.titularPlayers!.isNotEmpty) {
+  //               return Column(
+  //                 mainAxisSize: MainAxisSize.max,
+  //                 children:
+  //                     _buildTeam(state.titularPlayers!, state.allPlayers!),
+  //               );
+  //             } else if (state.titularPlayers!.isEmpty) {
+  //               return _buildEmptyState();
+  //             }
+
+  //             return const SizedBox.shrink();
+  //           },
+  //         ),
+  //         Positioned(
+  //           right: 1,
+  //           left: 1,
+  //           bottom: 1,
+  //           child: BannerAdWidget(
+  //             adsCubit: _adsCubit,
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
   BlocBuilder<HomeCubit, HomeState> _content() {
     return BlocBuilder<HomeCubit, HomeState>(
       bloc: _homeCubit,
@@ -87,7 +136,15 @@ class _HomePageState extends State<HomePage> {
               _buildBackground(),
               if (state.titularPlayers!.isNotEmpty)
                 ..._buildTeam(state.titularPlayers!, state.allPlayers!),
-              if (state.titularPlayers!.isEmpty) _buildEmptyState()
+              if (state.titularPlayers!.isEmpty) _buildEmptyState(),
+              // Positioned(
+              //   right: 1,
+              //   left: 1,
+              //   bottom: 1,
+              //   child: BannerAdWidget(
+              //     adsCubit: _adsCubit,
+              //   ),
+              // ),
             ],
           ),
         );

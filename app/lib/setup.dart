@@ -1,6 +1,11 @@
 import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:custom_utilities/custom_utilities.dart';
+import 'package:professorfc_app/features/ads/data/repositories/ads_banner_repository_impl.dart';
+import 'package:professorfc_app/features/ads/data/repositories/ads_publisher_banner_repository_impl.dart';
+import 'package:professorfc_app/features/ads/domain/repositories/ads_banner_repository.dart';
+import 'package:professorfc_app/features/ads/domain/repositories/ads_publisher_banner_repository.dart';
+import 'package:professorfc_app/features/ads/presentation/bloc/ads_cubit.dart';
 
 import 'config/injections/injection_bloc.dart';
 import 'config/injections/injection_data_source.dart';
@@ -11,7 +16,20 @@ import 'config/injections/injection_service.dart';
 GetIt getItInstance = GetIt.instance;
 GetIt root = GetIt.asNewInstance();
 
-void setupRoot() {}
+void setupRoot() {
+  root.registerLazySingleton<AdsBannerRepository>(
+    () => AdsBannerRepositoryImpl(),
+  );
+
+  root.registerLazySingleton<AdsPublisherBannerRepository>(
+    () => AdsPublisherBannerRepositoryImpl(),
+  );
+
+  root.registerFactory<AdsCubit>(() => AdsCubit(
+        adsBannerRepository: root<AdsBannerRepository>(),
+        adsPublisherBannerRepository: root<AdsPublisherBannerRepository>(),
+      ));
+}
 
 Future setup() async {
   getItInstance.allowReassignment = true;

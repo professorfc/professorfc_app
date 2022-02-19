@@ -13,6 +13,7 @@ mixin SaoPauloTeamMockMixin {
     int _base = 100000;
     Random _ran = Random();
     TeamModel model = TeamModel(
+      key: "sao_paulo",
       id: _ran.nextInt(_base).toString(),
       name: "São Paulo",
       icon: "https://www.escudosfc.com.br/images/saopaulo.png",

@@ -4,6 +4,7 @@ import 'package:professorfc_app/features/home/data/models/player_model.dart';
 
 class TeamModel extends Equatable {
   const TeamModel({
+    required this.key,
     required this.id,
     required this.name,
     required this.icon,
@@ -13,6 +14,7 @@ class TeamModel extends Equatable {
     required this.formation,
   });
 
+  final String key;
   final String id;
   final String name;
   final String icon;
@@ -23,6 +25,7 @@ class TeamModel extends Equatable {
 
   factory TeamModel.fromJson(Map<String, dynamic> json) {
     return TeamModel(
+      key: json['key'],
       id: json['id'],
       icon: json['icon'],
       name: json['name'],
@@ -49,6 +52,7 @@ class TeamModel extends Equatable {
 
   Map<String, dynamic> toJson() {
     return {
+      'key': key,
       'id': id,
       'name': name,
       'icon': icon,
@@ -61,6 +65,7 @@ class TeamModel extends Equatable {
 
   @override
   List<Object?> get props => [
+        key,
         id,
         name,
         icon,

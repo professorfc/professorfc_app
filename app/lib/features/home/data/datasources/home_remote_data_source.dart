@@ -9,6 +9,7 @@ import 'package:professorfc_app/features/home/data/models/team_model.dart';
 import 'package:professorfc_app/features/home/domain/entities/enums/position_enum.dart';
 import 'package:professorfc_app/features/home/domain/entities/enums/position_group_enum.dart';
 import 'package:professorfc_app/shared/load_mock.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part './teams/corinthians_mixin.dart';
 part './teams/sao_paulo_mixin.dart';
@@ -17,7 +18,8 @@ part './teams/santos_mixin.dart';
 part 'formation_position_mixin.dart';
 
 abstract class HomeRemoteDataSource {
-  Future<TeamModel> getTeam();
+  Future<TeamModel?> getTeam();
+  Future<void> setTeam(String key);
   Future<List<FormationPositionModel>> getFormations();
 }
 
@@ -28,12 +30,20 @@ class HomeRemoteDataSourceImpl
 
   final RemoteClientRepository remoteClientRepository;
 
-  @override
-  Future<TeamModel> getTeam() async {
-    // var response = await LoadMock.fromAsset("teams/corinthians.json");
-    // return Future.value(TeamModel.fromJson(response));
+  static const String _latestTeamSelected = "latest_team_selected";
 
-    return getTeamFromModel();
+  @override
+  Future<TeamModel?> getTeam() async {
+    final prefs = await SharedPreferences.getInstance();
+    var _value = prefs.getString(_latestTeamSelected);
+
+    if (_value != null) {
+      var response = await LoadMock.fromAsset("teams/$_value.json");
+      return Future.value(TeamModel.fromJson(response));
+      //return getTeamFromModel();
+    }
+
+    return Future.value(null);
   }
 
   @override
@@ -45,5 +55,11 @@ class HomeRemoteDataSourceImpl
         .toList();
 
     return Future.value(completeList);
+  }
+
+  @override
+  Future<void> setTeam(String key) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_latestTeamSelected, key);
   }
 }

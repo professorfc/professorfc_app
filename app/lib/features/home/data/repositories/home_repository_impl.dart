@@ -12,12 +12,12 @@ class HomeRepositoryImpl implements HomeRepository {
   final HomeRemoteDataSource remoteDataSource;
 
   @override
-  Future<Either<TeamModel, Exception>> getTeam() async {
+  Future<Either<TeamModel?, Exception>> getTeam() async {
     try {
       var response = await remoteDataSource.getTeam();
-      return Left<TeamModel, Exception>(response);
+      return Left<TeamModel?, Exception>(response);
     } on dynamic catch (e) {
-      return Right<TeamModel, Exception>(e);
+      return Right<TeamModel?, Exception>(e);
     }
   }
 
@@ -29,6 +29,16 @@ class HomeRepositoryImpl implements HomeRepository {
       return Left<List<FormationPositionModel>, Exception>(response);
     } on dynamic catch (e) {
       return Right<List<FormationPositionModel>, Exception>(e);
+    }
+  }
+
+  @override
+  Future<Either<void, Exception>> setTeam(String key) async {
+    try {
+      var response = await remoteDataSource.setTeam(key);
+      return Left<void, Exception>(response);
+    } on dynamic catch (e) {
+      return Right<void, Exception>(e);
     }
   }
 }

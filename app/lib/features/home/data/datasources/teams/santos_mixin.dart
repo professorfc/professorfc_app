@@ -13,6 +13,7 @@ mixin SantosTeamMockMixin {
     int _base = 100000;
     Random _ran = Random();
     TeamModel model = TeamModel(
+      key: "santos",
       id: _ran.nextInt(_base).toString(),
       name: "Santos",
       icon: "https://www.escudosfc.com.br/images/santos.png",

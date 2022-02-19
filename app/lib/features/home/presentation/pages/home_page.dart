@@ -76,22 +76,46 @@ class _HomePageState extends State<HomePage> {
           return CustomCircularProgressIndicator(
             color: Theme.of(context).backgroundColor,
           );
-        } else if (state.titularPlayers!.isNotEmpty) {
-          return Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Stack(
-              key: _parentKey,
-              fit: StackFit.expand,
-              children: [
-                _buildBackground(),
-                ..._buildTeam(state.titularPlayers!, state.allPlayers!),
-              ],
-            ),
-          );
         }
 
-        return const SizedBox.shrink();
+        return Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Stack(
+            key: _parentKey,
+            fit: StackFit.expand,
+            children: [
+              _buildBackground(),
+              if (state.titularPlayers!.isNotEmpty)
+                ..._buildTeam(state.titularPlayers!, state.allPlayers!),
+              if (state.titularPlayers!.isEmpty) _buildEmptyState()
+            ],
+          ),
+        );
       },
+    );
+  }
+
+  Widget _buildEmptyState() {
+    return Center(
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Theme.of(context).backgroundColor,
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).primaryColor,
+              spreadRadius: 1,
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: "Escolha o seu time".title(
+            context,
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
+      ),
     );
   }
 

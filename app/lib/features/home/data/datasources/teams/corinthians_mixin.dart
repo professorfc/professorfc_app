@@ -13,6 +13,7 @@ mixin CorithiansTeamMockMixin {
     int _base = 100000;
     Random _ran = Random();
     TeamModel model = TeamModel(
+      key: "corinthians",
       id: _ran.nextInt(_base).toString(),
       name: "Corinthians",
       icon: "https://www.escudosfc.com.br/images/corinthians.png",

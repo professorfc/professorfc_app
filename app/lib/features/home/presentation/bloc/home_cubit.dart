@@ -102,10 +102,19 @@ class HomeCubit extends Cubit<HomeState> {
       forceRefresh: StateUtils.generateRandomNumber() as int?,
     ));
 
-    Either<TeamModel, Exception> _response = await homeRepository.getTeam();
+    Either<TeamModel?, Exception> _response = await homeRepository.getTeam();
 
     _response.fold((team) {
-      setTeam(team);
+      if (team != null) {
+        setTeam(team);
+      } else {
+        emit(state.copyWith(
+          isLoading: false,
+          isError: true,
+          isSuccess: false,
+          forceRefresh: StateUtils.generateRandomNumber() as int?,
+        ));
+      }
     }, (error) {
       emit(state.copyWith(
         isLoading: false,
@@ -116,6 +125,8 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void setTeam(TeamModel team) {
+    homeRepository.setTeam(team.key);
+
     var _titularPlayers = team.holders;
 
     for (var item in _titularPlayers) {

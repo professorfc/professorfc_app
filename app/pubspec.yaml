@@ -26,6 +26,7 @@ dependencies:
     #   ref: main
     path: ../../custom_utilities
   collection: ^1.15.0
+  cached_network_image: ^3.2.0
 
 dev_dependencies:
   flutter_test:

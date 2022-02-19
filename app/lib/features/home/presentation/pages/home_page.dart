@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:professorfc_app/features/home/data/models/player_model.dart';
 import 'package:professorfc_app/features/home/presentation/bloc/home_cubit.dart';
 import 'package:professorfc_app/features/home/presentation/bloc/home_state.dart';
+import 'package:professorfc_app/features/search_teams/presentation/bloc/search_teams_cubit.dart';
 import 'package:professorfc_app/setup.dart';
-import 'package:professorfc_app/widgets/custom_bottom_navigation_bar.dart';
 import 'package:professorfc_app/widgets/draggable_floating_action_button.dart';
 import 'package:professorfc_app/widgets/fancy_fab.dart';
 import 'package:professorfc_app/widgets/formations.dart';
 import 'package:professorfc_app/widgets/player_item.dart';
 import "package:collection/collection.dart";
+import 'package:professorfc_app/widgets/search_teams.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -22,9 +23,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final GlobalKey _parentKey = GlobalKey();
   late HomeCubit _homeCubit;
+  late SearchTeamsCubit _searchTeamsCubit;
 
   @override
   void initState() {
+    _searchTeamsCubit = getItInstance.get<SearchTeamsCubit>()..getTeams();
+
     _homeCubit = getItInstance.get<HomeCubit>()
       ..getPlayers()
       ..getFormations();
@@ -47,19 +51,20 @@ class _HomePageState extends State<HomePage> {
         child: _content(),
       ),
       floatingActionButton: _actionButtons(),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(AppIcons.futbol),
-            label: 'Esquema',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(AppIcons.user),
-            label: 'Eu',
-          ),
-        ],
-        onTap: (int currentIndex) {},
-      ),
+      // TODO:in development
+      // bottomNavigationBar: CustomBottomNavigationBar(
+      //   items: const [
+      //     BottomNavigationBarItem(
+      //       icon: Icon(AppIcons.futbol),
+      //       label: 'Esquema',
+      //     ),
+      //     // BottomNavigationBarItem(
+      //     //   icon: Icon(AppIcons.user),
+      //     //   label: 'Eu',
+      //     // ),
+      //   ],
+      //   onTap: (int currentIndex) {},
+      // ),
     );
   }
 
@@ -100,6 +105,9 @@ class _HomePageState extends State<HomePage> {
         if (state.formationPositions!.isNotEmpty) {
           return FancyFab(
             beginButtonColor: Theme.of(context).backgroundColor,
+            searchTeamsCallback: () {
+              showSearchTeams(context, _searchTeamsCubit);
+            },
             formmationCallback: () {
               showFormations(context, _homeCubit, state.formationPositions!);
             },

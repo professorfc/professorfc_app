@@ -1,3 +1,4 @@
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:custom_view/custom_view.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,7 @@ class FancyFab extends StatefulWidget {
 
   final VoidCallback formmationCallback;
   final VoidCallback saveFormmationCallback;
+  final VoidCallback searchTeamsCallback;
 
   FancyFab({
     required this.beginButtonColor,
@@ -17,6 +19,7 @@ class FancyFab extends StatefulWidget {
     this.icon,
     required this.formmationCallback,
     required this.saveFormmationCallback,
+    required this.searchTeamsCallback,
   });
 
   @override
@@ -127,7 +130,7 @@ class _FancyFabState extends State<FancyFab>
 
   Widget search() {
     return FloatingActionButton(
-      onPressed: null,
+      onPressed: widget.searchTeamsCallback,
       backgroundColor: _overrideFloactingActionButtonTheme.backgroundColor,
       foregroundColor: _overrideFloactingActionButtonTheme.foregroundColor,
       tooltip: 'Search',
@@ -164,14 +167,15 @@ class _FancyFabState extends State<FancyFab>
         //   ),
         //   child: share(),
         // ),
-        Transform(
-          transform: Matrix4.translationValues(
-            0.0,
-            _translateButton.value * 3.0,
-            0.0,
+        if (isInDebugMode)
+          Transform(
+            transform: Matrix4.translationValues(
+              0.0,
+              _translateButton.value * 3.0,
+              0.0,
+            ),
+            child: save(),
           ),
-          child: save(),
-        ),
         Transform(
           transform: Matrix4.translationValues(
             0.0,

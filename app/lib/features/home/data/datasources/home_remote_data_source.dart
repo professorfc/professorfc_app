@@ -13,6 +13,7 @@ import 'package:professorfc_app/shared/load_mock.dart';
 part './teams/corinthians_mixin.dart';
 part './teams/sao_paulo_mixin.dart';
 part './teams/palmeiras_mixin.dart';
+part './teams/santos_mixin.dart';
 part 'formation_position_mixin.dart';
 
 abstract class HomeRemoteDataSource {
@@ -21,7 +22,7 @@ abstract class HomeRemoteDataSource {
 }
 
 class HomeRemoteDataSourceImpl
-    with PalmeirasTeamMockMixin, FormationPositionMixin
+    with SantosTeamMockMixin, FormationPositionMixin
     implements HomeRemoteDataSource {
   HomeRemoteDataSourceImpl(this.remoteClientRepository);
 

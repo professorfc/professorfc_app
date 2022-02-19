@@ -7,7 +7,12 @@ mixin TeamMockMixin {
 
     _allPlayers.sort((a, b) => a.name.compareTo(b.name));
 
+    int _base = 100000;
+    Random _ran = Random();
     TeamModel model = TeamModel(
+      id: _ran.nextInt(_base).toString(),
+      name: "Corinthians",
+      icon: "https://www.escudosfc.com.br/images/corinthians.png",
       holders: _allPlayers.where((element) => element.startingPlayer).toList(),
       reservers:
           _allPlayers.where((element) => !element.startingPlayer).toList(),

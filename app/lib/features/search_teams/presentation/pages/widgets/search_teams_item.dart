@@ -22,19 +22,29 @@ class SearchTeamsItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CircleAvatar(
-              backgroundColor: Colors.transparent,
-              child: CachedNetworkImage(
-                imageUrl: team.icon,
-                placeholder: (context, url) => CircularProgressIndicator(),
-                errorWidget: (context, url, error) =>
-                    const Icon(AppIcons.exclamation),
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  child: CachedNetworkImage(
+                    imageUrl: team.icon,
+                    placeholder: (context, url) => CircularProgressIndicator(
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(AppIcons.exclamation),
+                  ),
+                ),
+                SpacerBox.h10,
+                team.name.description(context),
+              ],
             ),
-            SpacerBox.h8,
-            team.name.description(context),
+            const CustomIcon(
+              icon: AppIcons.angle_right,
+            ),
           ],
         ),
       ),

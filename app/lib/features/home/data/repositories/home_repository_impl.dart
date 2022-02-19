@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:professorfc_app/features/home/data/datasources/home_remote_data_source.dart';
-import 'package:professorfc_app/features/home/data/models/player_model.dart';
+import 'package:professorfc_app/features/home/data/models/team_model.dart';
 import 'package:professorfc_app/features/home/domain/repositories/home_repository.dart';
 
 class HomeRepositoryImpl implements HomeRepository {
@@ -11,12 +11,12 @@ class HomeRepositoryImpl implements HomeRepository {
   final HomeRemoteDataSource remoteDataSource;
 
   @override
-  Future<Either<List<PlayerModel>, Exception>> getPlayers() async {
+  Future<Either<TeamModel, Exception>> getTeam() async {
     try {
-      var response = await remoteDataSource.getPlayers();
-      return Left<List<PlayerModel>, Exception>(response);
+      var response = await remoteDataSource.getTeam();
+      return Left<TeamModel, Exception>(response);
     } on dynamic catch (e) {
-      return Right<List<PlayerModel>, Exception>(e);
+      return Right<TeamModel, Exception>(e);
     }
   }
 

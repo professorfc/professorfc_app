@@ -1,6 +1,7 @@
 import 'package:custom_utilities/custom_utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:professorfc_app/features/home/data/models/player_model.dart';
+import 'package:professorfc_app/features/home/data/models/team_model.dart';
 
 class HomeState extends DefaultState {
   HomeState({
@@ -14,6 +15,7 @@ class HomeState extends DefaultState {
     this.forceRefresh,
     this.screenSize,
     this.formations,
+    this.team,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -27,6 +29,7 @@ class HomeState extends DefaultState {
   final List<PlayerModel>? allPlayers;
   final Size? screenSize;
   final List<int>? formations;
+  final TeamModel? team;
 
   factory HomeState.initial() {
     return HomeState(
@@ -40,6 +43,7 @@ class HomeState extends DefaultState {
       forceRefresh: null,
       screenSize: null,
       formations: const [],
+      team: null,
     );
   }
 
@@ -54,6 +58,7 @@ class HomeState extends DefaultState {
     int? forceRefresh,
     Size? screenSize,
     List<int>? formations,
+    TeamModel? team,
   }) {
     return HomeState(
       isLoading: isLoading ?? this.isLoading,
@@ -66,6 +71,7 @@ class HomeState extends DefaultState {
       forceRefresh: forceRefresh ?? this.forceRefresh,
       screenSize: screenSize ?? this.screenSize,
       formations: formations ?? this.formations,
+      team: team ?? this.team,
     );
   }
 
@@ -81,5 +87,6 @@ class HomeState extends DefaultState {
         allPlayers,
         screenSize,
         formations,
+        team,
       ];
 }

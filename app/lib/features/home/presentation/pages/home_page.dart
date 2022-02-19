@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       child: Container(
-        color: const Color(0xff008001),
+        color: const Color(0xff008001), //TODO:review this
         constraints: const BoxConstraints.expand(),
         child: _content(),
       ),
@@ -108,6 +108,8 @@ class _HomePageState extends State<HomePage> {
                 print(
                     'PLAYER:${player.name} - DX:${player.dx} - DY:${player.dy} - ID:${player.id} - NF:${player.positionNotFound.toString()}');
               }
+
+              _homeCubit.save();
             },
           );
         }
@@ -162,32 +164,34 @@ class _HomePageState extends State<HomePage> {
     var _groupBy =
         allPlayers.groupListsBy((element) => element.positionGroup.value);
 
-    _groupBy.forEach((key, value) {
-      _list.add(
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              key.label(context),
-              const Divider(),
-              ...value
-                  .map(
-                    (element) => CustomItemModalFit(
-                      text: element.name,
-                      iconData: AppIcons.user,
-                      onTap: () {
-                        _homeCubit.updatePlayer(fromPlayer, element);
-                        Navigator.pop(context);
-                      },
-                    ),
-                  )
-                  .toList(),
-            ],
+    _groupBy.forEach(
+      (key, value) {
+        _list.add(
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                key.label(context),
+                const Divider(),
+                ...value
+                    .map(
+                      (element) => CustomItemModalFit(
+                        text: element.name,
+                        iconData: AppIcons.user,
+                        onTap: () {
+                          _homeCubit.updatePlayer(fromPlayer, element);
+                          Navigator.pop(context);
+                        },
+                      ),
+                    )
+                    .toList(),
+              ],
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
 
     return _list;
   }

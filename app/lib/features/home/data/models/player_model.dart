@@ -55,7 +55,19 @@ class PlayerModel extends Player {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    return data;
+
+    return {
+      'id': id,
+      'name': name,
+      'photo': photo,
+      'dx': dx,
+      'dy': dy,
+      'lines': lines.map((e) => e.index).toList(),
+      'startingPlayer': startingPlayer,
+      'positions': positions.map((e) => e.index).toList(),
+      'positionNotFound': positionNotFound,
+      'positionGroup': positionGroup.value
+    };
   }
 
   PlayerModel copyWith() {

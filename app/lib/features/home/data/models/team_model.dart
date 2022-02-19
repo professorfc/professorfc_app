@@ -39,7 +39,11 @@ class TeamModel extends Team {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    return data;
+    return {
+      'holders': holders.map((e) => (e as PlayerModel).toJson()).toList(),
+      'reservers': reservers.map((e) => (e as PlayerModel).toJson()).toList(),
+      'coach': (coach as CoachModel).toJson(),
+      'formation': formation,
+    };
   }
 }

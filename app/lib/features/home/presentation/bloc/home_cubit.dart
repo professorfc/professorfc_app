@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:custom_utilities/custom_utilities.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:professorfc_app/features/home/data/models/player_model.dart';
+import 'package:professorfc_app/features/home/data/models/team_model.dart';
 import 'package:professorfc_app/features/home/domain/entities/enums/formation_enum.dart';
 import 'package:professorfc_app/features/home/domain/repositories/home_repository.dart';
 import 'home_state.dart';
@@ -12,6 +15,15 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.homeRepository) : super(HomeState.initial());
 
   final HomeRepository homeRepository;
+
+  void save() {
+    try {
+      var _json = jsonEncode(state.team!.toJson());
+      print(_json);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   void setScreenSize(Size size) {
     emit(state.copyWith(screenSize: size));
@@ -85,12 +97,10 @@ class HomeCubit extends Cubit<HomeState> {
       forceRefresh: StateUtils.generateRandomNumber() as int?,
     ));
 
-    Either<List<PlayerModel>, Exception> _response =
-        await homeRepository.getPlayers();
+    Either<TeamModel, Exception> _response = await homeRepository.getTeam();
 
-    _response.fold((allPlayers) {
-      var _titularPlayers =
-          allPlayers.where((element) => element.startingPlayer).toList();
+    _response.fold((team) {
+      var _titularPlayers = team.holders as List<PlayerModel>;
 
       for (var item in _titularPlayers) {
         item.dx = CalculateCoordinates.getRelativeWidth(
@@ -104,8 +114,12 @@ class HomeCubit extends Cubit<HomeState> {
         isLoading: false,
         isError: false,
         isSuccess: false,
+        team: team,
         titularPlayers: _titularPlayers,
-        allPlayers: allPlayers,
+        allPlayers: <PlayerModel>[
+          ...team.holders as List<PlayerModel>,
+          ...team.reservers as List<PlayerModel>
+        ],
       ));
     }, (error) {
       emit(state.copyWith(

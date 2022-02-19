@@ -1,27 +1,64 @@
 import 'dart:math';
 
 import 'package:custom_utilities/custom_utilities.dart';
+import 'package:professorfc_app/features/home/data/models/coach_model.dart';
 import 'package:professorfc_app/features/home/data/models/player_model.dart';
+import 'package:professorfc_app/features/home/data/models/team_model.dart';
 import 'package:professorfc_app/features/home/domain/entities/enums/formation_enum.dart';
 import 'package:professorfc_app/features/home/domain/entities/enums/position_enum.dart';
 import 'package:professorfc_app/features/home/domain/entities/enums/position_group_enum.dart';
+import 'package:professorfc_app/shared/load_mock.dart';
 
 abstract class HomeRemoteDataSource {
-  Future<List<PlayerModel>> getPlayers();
+  Future<TeamModel> getTeam();
   Future<List<int>> getFormations();
 }
 
-class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
+class HomeRemoteDataSourceImpl
+    with TeamMockMixin
+    implements HomeRemoteDataSource {
   HomeRemoteDataSourceImpl(this.remoteClientRepository);
 
   final RemoteClientRepository remoteClientRepository;
 
   @override
-  Future<List<PlayerModel>> getPlayers() {
+  Future<TeamModel> getTeam() async {
+    var response = await LoadMock.fromAsset("teams/corinthians.json");
+    return TeamModel.fromJson(response);
+  }
+
+  @override
+  Future<List<int>> getFormations() {
+    return Future.value(FormationEnum.formations.keys.toList());
+  }
+}
+
+mixin TeamMockMixin {
+  Future<TeamModel> getTeamFromModel() {
+    var _allPlayers = _getHoldersPlayers();
+    _allPlayers.addAll(_getReservePlayers());
+
+    _allPlayers.sort((a, b) => a.name.compareTo(b.name));
+
+    TeamModel model = TeamModel(
+      holders: _allPlayers.where((element) => element.startingPlayer).toList(),
+      reservers:
+          _allPlayers.where((element) => !element.startingPlayer).toList(),
+      coach: const CoachModel(
+        age: 40,
+        name: 'Fernando Lázaro',
+      ),
+      formation: 442,
+    );
+
+    return Future.value(model);
+  }
+
+  List<PlayerModel> _getHoldersPlayers() {
     int _base = 100000;
     Random _ran = Random();
 
-    var _allPlayers = [
+    return [
       PlayerModel(
         id: _ran.nextInt(_base).toString(),
         dx: 159.6,
@@ -133,12 +170,6 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         startingPlayer: true,
       ),
     ];
-
-    _allPlayers.addAll(_getReservePlayers());
-
-    _allPlayers.sort((a, b) => a.name.compareTo(b.name));
-
-    return Future.value(_allPlayers);
   }
 
   List<PlayerModel> _getReservePlayers() {
@@ -346,10 +377,5 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         startingPlayer: false,
       ),
     ];
-  }
-
-  @override
-  Future<List<int>> getFormations() {
-    return Future.value(FormationEnum.formations.keys.toList());
   }
 }

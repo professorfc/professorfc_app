@@ -9,7 +9,7 @@ import 'package:professorfc_app/setup.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //await MobileAds.instance.initialize();
+  await MobileAds.instance.initialize();
   await Firebase.initializeApp();
 
   await setup();

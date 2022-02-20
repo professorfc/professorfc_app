@@ -74,49 +74,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // Widget _content2() {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(4.0),
-  //     child: Stack(
-  //       key: _parentKey,
-  //       fit: StackFit.expand,
-  //       children: [
-  //         _buildBackground(),
-  //         BlocBuilder<HomeCubit, HomeState>(
-  //           bloc: _homeCubit,
-  //           builder: (context, state) {
-  //             if (state.isLoading == true) {
-  //               return Center(
-  //                 child: CustomCircularProgressIndicator(
-  //                   color: Theme.of(context).backgroundColor,
-  //                 ),
-  //               );
-  //             } else if (state.titularPlayers!.isNotEmpty) {
-  //               return Column(
-  //                 mainAxisSize: MainAxisSize.max,
-  //                 children:
-  //                     _buildTeam(state.titularPlayers!, state.allPlayers!),
-  //               );
-  //             } else if (state.titularPlayers!.isEmpty) {
-  //               return _buildEmptyState();
-  //             }
-
-  //             return const SizedBox.shrink();
-  //           },
-  //         ),
-  //         Positioned(
-  //           right: 1,
-  //           left: 1,
-  //           bottom: 1,
-  //           child: BannerAdWidget(
-  //             adsCubit: _adsCubit,
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   BlocBuilder<HomeCubit, HomeState> _content() {
     return BlocBuilder<HomeCubit, HomeState>(
       bloc: _homeCubit,
@@ -137,14 +94,14 @@ class _HomePageState extends State<HomePage> {
               if (state.titularPlayers!.isNotEmpty)
                 ..._buildTeam(state.titularPlayers!, state.allPlayers!),
               if (state.titularPlayers!.isEmpty) _buildEmptyState(),
-              // Positioned(
-              //   right: 1,
-              //   left: 1,
-              //   bottom: 1,
-              //   child: BannerAdWidget(
-              //     adsCubit: _adsCubit,
-              //   ),
-              // ),
+              Positioned(
+                right: 1,
+                left: 1,
+                bottom: 1,
+                child: BannerAdWidget(
+                  adsCubit: _adsCubit,
+                ),
+              ),
             ],
           ),
         );

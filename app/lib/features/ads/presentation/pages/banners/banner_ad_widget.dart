@@ -31,6 +31,7 @@ class BannerAdWidget extends StatelessWidget {
   }
 }
 
+//TODO:review this
 // class BannerAdWidget extends StatefulWidget {
 //   BannerAdWidget({
 //     required this.screenName,

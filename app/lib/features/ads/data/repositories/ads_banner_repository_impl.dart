@@ -85,7 +85,7 @@ class AdsBannerRepositoryImpl implements AdsBannerRepository {
     if (Platform.isAndroid) {
       return 'ca-app-pub-5039935894572150/6212821455';
     } else if (Platform.isIOS) {
-      return '';
+      return 'ca-app-pub-5039935894572150/3384645425';
     }
 
     return null;

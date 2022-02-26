@@ -54,7 +54,9 @@ class _HomePageState extends State<HomePage> {
       child: Container(
         color: const Color(0xff008001), //TODO:review this
         constraints: const BoxConstraints.expand(),
-        child: _content(),
+        child: SafeArea(
+          child: _content(),
+        ),
       ),
       floatingActionButton: _actionButtons(),
       // TODO:in development

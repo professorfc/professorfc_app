@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
     return Center(
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(80),
           color: Theme.of(context).backgroundColor,
           boxShadow: [
             BoxShadow(
@@ -124,11 +124,17 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: "Escolha o seu time".title(
-            context,
-            color: Theme.of(context).primaryColor,
+        child: InkWell(
+          onTap: () {
+            showSearchTeams(context, _homeCubit, _searchTeamsCubit);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: "Escolha\no seu time".title(
+              context,
+              color: Theme.of(context).primaryColor,
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
       ),

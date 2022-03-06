@@ -15,6 +15,12 @@ part './teams/corinthians_mixin.dart';
 part './teams/sao_paulo_mixin.dart';
 part './teams/palmeiras_mixin.dart';
 part './teams/santos_mixin.dart';
+part './teams/cruzeiro_mixin.dart';
+part './teams/america_mineiro_mixin.dart';
+part './teams/atletico_paranaense_mixin.dart';
+part './teams/atletico_mineiro_mixin.dart';
+part './teams/flamengo_mixin.dart';
+
 part 'formation_position_mixin.dart';
 
 abstract class HomeRemoteDataSource {
@@ -24,7 +30,7 @@ abstract class HomeRemoteDataSource {
 }
 
 class HomeRemoteDataSourceImpl
-    with SantosTeamMockMixin, FormationPositionMixin
+    with FlamengoTeamMockMixin, FormationPositionMixin
     implements HomeRemoteDataSource {
   HomeRemoteDataSourceImpl(this.remoteClientRepository);
 

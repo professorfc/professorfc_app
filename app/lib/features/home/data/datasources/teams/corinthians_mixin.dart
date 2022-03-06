@@ -16,7 +16,8 @@ mixin CorithiansTeamMockMixin {
       key: "corinthians",
       id: _ran.nextInt(_base).toString(),
       name: "Corinthians",
-      icon: "https://www.escudosfc.com.br/images/corinthians.png",
+      icon:
+          "https://firebasestorage.googleapis.com/v0/b/professorfc-e8eed.appspot.com/o/teams%2Ficons%2Fcorinthians.png?alt=media&token=6a88e476-8bd8-48a7-a925-133e42333dfe",
       holders: _allPlayers.where((element) => element.startingPlayer).toList(),
       reservers:
           _allPlayers.where((element) => !element.startingPlayer).toList(),

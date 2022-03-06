@@ -16,7 +16,8 @@ mixin PalmeirasTeamMockMixin {
       key: "palmeiras",
       id: _ran.nextInt(_base).toString(),
       name: "Palmeiras",
-      icon: "https://www.escudosfc.com.br/images/palmeiras.png",
+      icon:
+          "https://firebasestorage.googleapis.com/v0/b/professorfc-e8eed.appspot.com/o/teams%2Ficons%2Fpalmeiras.png?alt=media&token=bd456794-91dc-4284-a706-f68287bcb75e",
       holders: _allPlayers.where((element) => element.startingPlayer).toList(),
       reservers:
           _allPlayers.where((element) => !element.startingPlayer).toList(),

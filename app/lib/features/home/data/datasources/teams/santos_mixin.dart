@@ -16,7 +16,8 @@ mixin SantosTeamMockMixin {
       key: "santos",
       id: _ran.nextInt(_base).toString(),
       name: "Santos",
-      icon: "https://www.escudosfc.com.br/images/santos.png",
+      icon:
+          "https://firebasestorage.googleapis.com/v0/b/professorfc-e8eed.appspot.com/o/teams%2Ficons%2Fsantos.png?alt=media&token=e37e2d43-9ceb-4e1d-83b6-e371a58701df",
       holders: _allPlayers.where((element) => element.startingPlayer).toList(),
       reservers:
           _allPlayers.where((element) => !element.startingPlayer).toList(),

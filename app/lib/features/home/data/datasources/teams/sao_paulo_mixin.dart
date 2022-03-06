@@ -16,7 +16,8 @@ mixin SaoPauloTeamMockMixin {
       key: "sao_paulo",
       id: _ran.nextInt(_base).toString(),
       name: "São Paulo",
-      icon: "https://www.escudosfc.com.br/images/saopaulo.png",
+      icon:
+          "https://firebasestorage.googleapis.com/v0/b/professorfc-e8eed.appspot.com/o/teams%2Ficons%2Fsaopaulo.png?alt=media&token=072f3190-da75-497f-842d-5fe2297ab7c6",
       holders: _allPlayers.where((element) => element.startingPlayer).toList(),
       reservers:
           _allPlayers.where((element) => !element.startingPlayer).toList(),

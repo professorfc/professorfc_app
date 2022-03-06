@@ -24,6 +24,7 @@ class SearchTeamsRemoteDataSourceImpl implements SearchTeamsRemoteDataSource {
       "america_mineiro",
       "atletico_paranaense",
       "atletico_mineiro",
+      "flamengo",
     ];
 
     for (var teamName in _teams) {

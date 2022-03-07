@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:custom_utilities/custom_utilities.dart';
 import 'package:professorfc_app/features/home/data/models/coach_model.dart';
 import 'package:professorfc_app/features/home/data/models/formation_position_model.dart';
 import 'package:professorfc_app/features/home/data/models/player_model.dart';
@@ -9,6 +8,7 @@ import 'package:professorfc_app/features/home/data/models/team_model.dart';
 import 'package:professorfc_app/features/home/domain/entities/enums/position_enum.dart';
 import 'package:professorfc_app/features/home/domain/entities/enums/position_group_enum.dart';
 import 'package:professorfc_app/shared/load_mock.dart';
+import 'package:professorfc_app/shared/remote_client_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part './teams/corinthians_mixin.dart';

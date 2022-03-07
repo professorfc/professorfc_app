@@ -1,7 +1,7 @@
-import 'package:custom_utilities/custom_utilities.dart';
 import 'package:professorfc_app/features/home/data/models/team_model.dart';
 import 'package:professorfc_app/features/home/data/models/teams_model.dart';
 import 'package:professorfc_app/shared/load_mock.dart';
+import 'package:professorfc_app/shared/remote_client_repository.dart';
 
 abstract class SearchTeamsRemoteDataSource {
   Future<TeamsModel> getTeams();

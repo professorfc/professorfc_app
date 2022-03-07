@@ -8,6 +8,7 @@ import 'config/injections/injection_data_source.dart';
 import 'config/injections/injection_model.dart';
 import 'config/injections/injection_repository.dart';
 import 'config/injections/injection_service.dart';
+import 'shared/remote_client_repository.dart';
 
 GetIt getItInstance = GetIt.instance;
 GetIt root = GetIt.asNewInstance();
